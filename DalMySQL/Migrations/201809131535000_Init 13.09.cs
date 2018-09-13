@@ -3,7 +3,7 @@ namespace DalMySQL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitNeu : DbMigration
+    public partial class Init1309 : DbMigration
     {
         public override void Up()
         {
@@ -18,18 +18,19 @@ namespace DalMySQL.Migrations
                         User = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.BuchungsReferenceId)
-                .ForeignKey("dbo.EingangsRechnung", t => t.RechnungsRefId, cascadeDelete: true)
+                .ForeignKey("dbo.BaseRechnung", t => t.RechnungsRefId, cascadeDelete: true)
                 .Index(t => t.RechnungsRefId);
             
             CreateTable(
-                "dbo.EingangsRechnung",
+                "dbo.BaseRechnung",
                 c => new
                     {
                         RechnungsId = c.Int(nullable: false, identity: true),
-                        Datum = c.DateTime(nullable: false, precision: 0),
+                        Datum = c.DateTime(precision: 0),
                         RechnungsNummer = c.String(unicode: false),
                         istStorniert = c.Boolean(nullable: false),
                         IstAusgebucht = c.Boolean(nullable: false),
+                        Discriminator = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
                     })
                 .PrimaryKey(t => t.RechnungsId);
             
@@ -42,6 +43,7 @@ namespace DalMySQL.Migrations
                         Datum = c.DateTime(nullable: false, precision: 0),
                         RechnungsId = c.Int(nullable: false),
                         User = c.Int(nullable: false),
+                        result = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.StornoReferenceId);
             
@@ -49,10 +51,10 @@ namespace DalMySQL.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.BuchungsReference", "RechnungsRefId", "dbo.EingangsRechnung");
+            DropForeignKey("dbo.BuchungsReference", "RechnungsRefId", "dbo.BaseRechnung");
             DropIndex("dbo.BuchungsReference", new[] { "RechnungsRefId" });
             DropTable("dbo.StornoReference");
-            DropTable("dbo.EingangsRechnung");
+            DropTable("dbo.BaseRechnung");
             DropTable("dbo.BuchungsReference");
         }
     }

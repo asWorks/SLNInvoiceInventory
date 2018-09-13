@@ -25,6 +25,7 @@ namespace DalMySQL
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
 
         public virtual DbSet<EingangsRechnung> EingangsRechnungen { get; set; }
+        public virtual DbSet<AusgangsRechnung> AusgangsRechnungen { get; set; }
         public virtual DbSet<BuchungsReference> BuchungsReferenzen { get; set; }
         public virtual DbSet<StornoReference> StornoReferenzen { get; set; }
 

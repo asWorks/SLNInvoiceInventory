@@ -13,6 +13,7 @@ namespace Contracts.Domain.Interfaces
 
         int User { get; set; }
 
+        bool result { get; set; }
 
     }
 }

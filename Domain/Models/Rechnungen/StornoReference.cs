@@ -39,6 +39,6 @@ namespace Domain.Models.Rechnungen
         public int RechnungsId { get; set; }
         public IInvoice Rechnung { get; set; }
         public int User { get; set; }
-       
+        public bool result { get; set; }
     }
 }

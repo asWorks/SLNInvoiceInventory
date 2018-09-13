@@ -1,4 +1,5 @@
-﻿using Contracts.Domain.Interfaces;
+﻿using Contracts.Domain.BaseClasses;
+using Contracts.Domain.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,7 +7,7 @@ namespace Domain.Models.Rechnungen
 {
     public class BuchungsReference : IBuchungsReference
     {
-        public BuchungsReference(IInvoice invoice, DateTime datum, string bemerkung)
+        public BuchungsReference(BaseRechnung invoice, DateTime datum, string bemerkung)
 
         {
             if (invoice == null)
@@ -20,7 +21,7 @@ namespace Domain.Models.Rechnungen
 
 
 
-            Rechnung = (EingangsRechnung)invoice;
+            Rechnung = invoice;
             Datum = datum;
             Bemerkung = bemerkung;
 
@@ -37,9 +38,9 @@ namespace Domain.Models.Rechnungen
         public DateTime? Datum { get; private set; }
 
 
-        public int RechnungsRefId { get; set; }
+        public int RechnungsRefId { get;private set; }
         [ForeignKey("RechnungsRefId")]
-        public EingangsRechnung Rechnung { get; set; }
+        public BaseRechnung Rechnung { get;  set; }
 
         public int User { get; private set; }
     }

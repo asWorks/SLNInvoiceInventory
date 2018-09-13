@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contracts.Domain.BaseClasses;
+using System;
 
 namespace Contracts.Domain.Interfaces
 {
@@ -8,7 +9,7 @@ namespace Contracts.Domain.Interfaces
         string Bemerkung { get;}
         DateTime? Datum { get;}
         int RechnungsRefId { get; }
-        //IInvoice Rechnung { get; }
+        BaseRechnung Rechnung { get; set; }
 
         int User { get; }
 

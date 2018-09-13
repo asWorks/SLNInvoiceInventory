@@ -7,13 +7,13 @@ namespace DalMySQL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitNeu : IMigrationMetadata
+    public sealed partial class AddedAusgangsRechnungen : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitNeu));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedAusgangsRechnungen));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809122246491_Init Neu"; }
+            get { return "201809131618056_Added AusgangsRechnungen"; }
         }
         
         string IMigrationMetadata.Source
