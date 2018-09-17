@@ -18,7 +18,13 @@ namespace TestingDomainClasses
             {
 
                 var ar = new AusgangsRechnung(DateTime.Now, "Ar_qwertz111");
+                ar.Netto = 667.17M;
+                ar.Zuzahlung = 99.12M;
+
                 db.AusgangsRechnungen.Add(ar);
+
+
+
                 var er = new EingangsRechnung(DateTime.Now, "New_qwertz111");
                 db.EingangsRechnungen.Add(er);
                var r= db.SaveChanges();
