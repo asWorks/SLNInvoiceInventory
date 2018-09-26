@@ -42,12 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\BaseClasses\BaseAdresse.cs" />
+    <Compile Include="Domain\BaseClasses\BaseKontaktDatum.cs" />
     <Compile Include="Domain\BaseClasses\BaseRechnung.cs" />
+    <Compile Include="Domain\BaseClasses\BaseRechnungsPartner.cs" />
+    <Compile Include="Domain\Enums\Enums.cs" />
     <Compile Include="Domain\Enums\Interface1.cs" />
+    <Compile Include="Domain\Interfaces\IAdresse.cs" />
     <Compile Include="Domain\Interfaces\IBuchungsReference.cs" />
     <Compile Include="Domain\Interfaces\IBuchungsResult.cs" />
     <Compile Include="Domain\Interfaces\IBuchungsTemplate.cs" />
     <Compile Include="Domain\Interfaces\IInvoice.cs" />
+    <Compile Include="Domain\Interfaces\IKontaktDatum.cs" />
+    <Compile Include="Domain\Interfaces\IRechnungsPartner.cs" />
     <Compile Include="Domain\Interfaces\IStornoReference.cs" />
     <Compile Include="Domain\Interfaces\IStornoResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -47,6 +47,7 @@
     <Compile Include="Models\Rechnungen\BuchungsResult_Failure.cs" />
     <Compile Include="Models\Rechnungen\BuchungsResult_IO.cs" />
     <Compile Include="Models\Rechnungen\EingangsRechnung.cs" />
+    <Compile Include="Models\Rechnungen\Lieferant.cs" />
     <Compile Include="Models\Rechnungen\StornoReference.cs" />
     <Compile Include="Models\Rechnungen\StornoResult_Failure.cs" />
     <Compile Include="Models\Rechnungen\StornoResult_IO.cs" />
