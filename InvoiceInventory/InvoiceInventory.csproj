@@ -86,8 +86,16 @@
     <Compile Include="Converters\SortDirectionToWidthConverter.cs" />
     <Compile Include="Demo\ExpenseData.cs" />
     <Compile Include="Events\EventMessage.cs" />
-    <Compile Include="Intefaces\ITestViewModel.cs" />
-    <Compile Include="Intefaces\IShellViewModel.cs" />
+    <Compile Include="Interfaces\IAddAusgangsrechnungViewModel.cs" />
+    <Compile Include="Interfaces\IAddRechnungViewModel.cs" />
+    <Compile Include="Interfaces\IInvoiceViewModel.cs" />
+    <Compile Include="Interfaces\ITestViewModel.cs" />
+    <Compile Include="Interfaces\IShellViewModel.cs" />
+    <Compile Include="ViewModels\AddEingangsrechnungViewModel.cs" />
+    <Compile Include="ViewModels\AddAusgangsrechnungViewModel.cs" />
+    <Compile Include="ViewModels\BaseAddRechnungViewModel.cs" />
+    <Compile Include="Interfaces\IBaseAddRechnungViewModel.cs" />
+    <Compile Include="Interfaces\IAddEingangsrechnungViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
     <Compile Include="App.xaml.cs">
@@ -95,11 +103,23 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Views\AddEingangsrechnungView.xaml.cs">
+      <DependentUpon>AddEingangsrechnungView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddAusgangsrechnungView.xaml.cs">
+      <DependentUpon>AddAusgangsrechnungView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BaseAddRechnungView.xaml.cs">
+      <DependentUpon>BaseAddRechnungView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddRechnungView.xaml.cs">
+      <DependentUpon>AddRechnungView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +150,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BaseClasses\" />
     <Folder Include="Helper\" />
   </ItemGroup>
   <ItemGroup>
@@ -151,11 +172,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddEingangsrechnungView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AddAusgangsrechnungView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BaseAddRechnungView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddRechnungView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

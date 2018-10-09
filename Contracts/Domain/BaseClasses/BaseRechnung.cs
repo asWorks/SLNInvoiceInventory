@@ -24,7 +24,7 @@ namespace Contracts.Domain.BaseClasses
 
             RechnungsNummer = rechnungsnummer;
             Datum = datum;
-            istStorniert = false;
+            IstStorniert = false;
             IstAusgebucht = false;
         }
 
@@ -36,12 +36,12 @@ namespace Contracts.Domain.BaseClasses
         public int RechnungsId { get; private set; }
         public DateTime? Datum { get; private set; }
         public string RechnungsNummer { get; private set; }
-        public bool istStorniert { get; private set; }
+        public bool IstStorniert { get; private set; }
         public bool IstAusgebucht { get; private set; }
 
         public virtual bool Storno(IStornoReference stornoReference)
         {
-            istStorniert = true;
+            IstStorniert = true;
             return true;
         }
 

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Domain.Models.Rechnungen;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Syncfusion.UI.Xaml.Grid.Helpers;
+using Syncfusion.UI.Xaml.Grid;
 
 namespace InvoiceInventory.Views
 {
@@ -23,6 +14,49 @@ namespace InvoiceInventory.Views
         public TestView()
         {
             InitializeComponent();
+        }
+
+        private void SyncfusionGrid_AddNewRowInitiating(object sender, Syncfusion.UI.Xaml.Grid.AddNewRowInitiatingEventArgs e)
+        {
+
+            var r = e.NewObject as AusgangsRechnung;
+            r.Netto = 19.11M;
+
+            ////var x = new AusgangsRechnung(DateTime.Now, "qwertz_asdfgh");
+
+            //////x.Ausbuchen(new BuchungsReference(x, DateTime.Now, "Non2"));
+            //////x.Storno(new StornoReference(x, DateTime.Now, "None", 24));
+            ////x.Zuzahlung = 11.11M;
+            ////x.Netto = 12.12M;
+            ////x.Umsatzsteuer = 1;
+
+
+            ////e.NewObject = x;
+
+            ////if (this.SyncfusionGrid.View.IsAddingNew)
+            ////{
+
+            ////    if (this.SyncfusionGrid.SelectionController.CurrentCellManager.CurrentCell.IsEditing)
+            ////        this.SyncfusionGrid.SelectionController.CurrentCellManager.EndEdit(true);
+
+            ////   var rowColumnIndex = this.SyncfusionGrid.SelectionController.CurrentCellManager.CurrentRowColumnIndex;
+
+            ////    //Process the commit operation in AddNewRow.
+            ////    var addNewRowController = this.SyncfusionGrid.GetAddNewRowController();
+            ////    addNewRowController.CommitAddNew();
+
+            ////    //Gets the row index of AddNewRow 
+            ////    rowColumnIndex.RowIndex = addNewRowController.GetAddNewRowIndex();
+            ////    this.SyncfusionGrid.SelectedItems.Clear();
+
+            ////    //If the AddNewRowPosition is Top need to move the current cell to next row 
+            ////    if (this.SyncfusionGrid.AddNewRowPosition == AddNewRowPosition.Top)
+            ////        rowColumnIndex.RowIndex = rowColumnIndex.RowIndex + 1;
+
+            ////    //Which retains the current cell border in the row after canceling AddNewRow as you press ESC key operation.
+            ////    this.SyncfusionGrid.MoveCurrentCell(rowColumnIndex);
+            ////}
+
         }
     }
 }

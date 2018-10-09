@@ -1,9 +1,9 @@
 ﻿using Caliburn.Micro;
 using DalMySQL;
+using Domain.Models.Rechnungen;
 using InvoiceInventory.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using Domain.Models.Rechnungen;
 
 namespace InvoiceInventory.ViewModels
 
@@ -26,8 +26,11 @@ namespace InvoiceInventory.ViewModels
             db = new InvoiceModel();
             var data = db.AusgangsRechnungen;
             Items = new ObservableCollection<Domain.Models.Rechnungen.AusgangsRechnung>(data);
+            isEditingAllowed = true;
+
         }
 
+        #region "Properties"
         private ObservableCollection<AusgangsRechnung> _Items;
         public ObservableCollection<AusgangsRechnung> Items
         {
@@ -55,12 +58,39 @@ namespace InvoiceInventory.ViewModels
                 {
                     _SelectedItem = value;
                     NotifyOfPropertyChange(() => SelectedItem);
-                   
+
                 }
             }
         }
 
 
 
+        private bool _isEditingAllowed;
+        public bool isEditingAllowed
+        {
+            get { return _isEditingAllowed; }
+            set
+            {
+                if (value != _isEditingAllowed)
+                {
+                    _isEditingAllowed = value;
+                    NotifyOfPropertyChange(() => isEditingAllowed);
+                    //  isDirty = true;
+                }
+            }
+        }
+
+
+        #endregion
+
+        #region "CommandMethods"
+
+        public void Save()
+        {
+            db.SaveChanges();
+        }
+
+
+        #endregion
     }
 }

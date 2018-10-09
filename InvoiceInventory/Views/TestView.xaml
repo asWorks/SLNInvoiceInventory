@@ -19,11 +19,18 @@
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="240*"/>
-                <RowDefinition Height="240*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <!--<DataGrid x:Name="Items" />-->
-            <syncfusion:SfDataGrid x:Name="SyncfusionGrid"
+            <StackPanel Orientation="Horizontal">
+                <CheckBox x:Name="isEditingAllowed"/>
+            </StackPanel>
+            
+            
+            <syncfusion:SfDataGrid Grid.Row="1" x:Name="SyncfusionGrid"
+                                   
+                                       NavigationMode="Cell"
                                        AutoGenerateColumns="False"
                                        BorderThickness="0"
                                        CellStyle="{StaticResource CellStyle}"
@@ -31,25 +38,26 @@
                                        Background="White"
                                        HeaderRowHeight="25"
                                        ItemsSource="{Binding Items}"
-                                       NavigationMode="Row"
                                        SelectionMode="Single"
                                        RowHeight="25"
-                                   SelectedItem="{Binding SelectedItem}">
+                                   SelectedItem="{Binding SelectedItem}" AllowDeleting="True" AllowEditing="True" AddNewRowPosition="FixedTop" AddNewRowInitiating="SyncfusionGrid_AddNewRowInitiating">
                 <syncfusion:SfDataGrid.Columns>
-                    <syncfusion:GridTextColumn MappingName="Datum" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" HeaderText="Datum" ValueBinding="{Binding Path=Datum, StringFormat='MMM dd yyyy'}" />
+                    <syncfusion:GridTextColumn AllowEditing="False" MappingName="Datum" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" HeaderText="Datum" ValueBinding="{Binding Path=Datum, StringFormat='MMM dd yyyy'}" />
 
-                    <syncfusion:GridTextColumn HeaderText="RechnungsId" MappingName="RechnungsId" />
-                    <syncfusion:GridTextColumn HeaderText="RechnungsNummer" MappingName="RechnungsNummer" />
-                  
-                    <syncfusion:GridTextColumn MappingName="´Netto" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Netto, StringFormat='{}{0:c}'}" />
+                    <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsId" MappingName="RechnungsId" />
+                    <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsNummer" MappingName="RechnungsNummer" />
+                    <syncfusion:GridCurrencyColumn MappingName="Netto" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Netto, StringFormat='{}{0:c}'}" />
+                   
+                    
                     <syncfusion:GridTextColumn MappingName="Zuzahlung" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Zuzahlung, StringFormat='{}{0:c}'}" />
-                    <syncfusion:GridCheckBoxColumn MappingName="IstStorniert" HeaderText="IstStorniert"/>
-                    <syncfusion:GridCheckBoxColumn MappingName="IstAusgebucht" HeaderText="IstAusgebucht"/>
+                    <syncfusion:GridCheckBoxColumn AllowEditing="False" MappingName="IstStorniert" HeaderText="IstStorniert"/>
+                    <syncfusion:GridCheckBoxColumn AllowEditing="False" MappingName="IstAusgebucht" HeaderText="IstAusgebucht"/>
 
                 </syncfusion:SfDataGrid.Columns>
 
             </syncfusion:SfDataGrid>
-            <StackPanel Grid.Row="2">
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Button x:Name="Save" Content="Speichern" Margin="10,0,10,0"/>
                 <TextBox Text="{Binding SelectedItem.RechnungsNummer, Mode=OneWay}"/>
             </StackPanel>
 

@@ -15,6 +15,8 @@ namespace InvoiceInventory.ViewModels
 
         private readonly IEventAggregator _events;
         private ITestViewModel _testViewModel;
+        private IAddAusgangsrechnungViewModel _addAusgangsRechnungViewModel;
+        private IAddEingangsrechnungViewModel _addEingangsRechnungViewModel;
 
         public ShellViewModel()
         {
@@ -24,10 +26,12 @@ namespace InvoiceInventory.ViewModels
         }
 
         [ImportingConstructor]
-        public ShellViewModel(ITestViewModel testVM, IEventAggregator events)
+        public ShellViewModel(ITestViewModel testVM,IAddAusgangsrechnungViewModel AddAusgangsRechnungVM, IAddEingangsrechnungViewModel AddEingangsRechnungVM, IEventAggregator events)
         {
             _events = events;
             _testViewModel = testVM;
+            _addAusgangsRechnungViewModel = AddAusgangsRechnungVM;
+            _addEingangsRechnungViewModel = AddEingangsRechnungVM;
             events.Subscribe(this);
 
         }
@@ -41,7 +45,15 @@ namespace InvoiceInventory.ViewModels
             ActivateItem(_testViewModel);
         }
 
+        public void AddAusgangsRechnung()
+        {
+            ActivateItem(_addAusgangsRechnungViewModel);
+        }
 
+        public void AddEingangsRechnung()
+        {
+            ActivateItem(_addEingangsRechnungViewModel);
+        }
 
         public void Handle(EventMessage message)
         {

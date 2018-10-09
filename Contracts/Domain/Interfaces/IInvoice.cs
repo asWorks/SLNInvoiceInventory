@@ -11,7 +11,7 @@ namespace Contracts.Domain.Interfaces
         int RechnungsId { get; }
         DateTime? Datum { get;}
         string RechnungsNummer { get; }
-        bool istStorniert { get; }
+        bool IstStorniert { get; }
         bool IstAusgebucht { get; }
 
         bool Storno(IStornoReference stornoReference);

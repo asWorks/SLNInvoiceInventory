@@ -25,6 +25,10 @@
             container.Singleton<IEventAggregator, EventAggregator>();
             container.PerRequest<IShellViewModel, ShellViewModel>();
             container.PerRequest<ITestViewModel, TestViewModel>();
+            container.PerRequest<IAddAusgangsrechnungViewModel, AddAusgangsrechnungViewModel>();
+            container.PerRequest<IAddEingangsrechnungViewModel, AddEingangsrechnungViewModel>();
+
+            container.PerRequest<IBaseAddRechnungViewModel, BaseAddRechnungViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)
