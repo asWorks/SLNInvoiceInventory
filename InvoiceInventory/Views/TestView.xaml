@@ -40,7 +40,7 @@
                                        ItemsSource="{Binding Items}"
                                        SelectionMode="Single"
                                        RowHeight="25"
-                                   SelectedItem="{Binding SelectedItem}" AllowDeleting="True" AllowEditing="True" AddNewRowPosition="FixedTop" AddNewRowInitiating="SyncfusionGrid_AddNewRowInitiating">
+                                   SelectedItem="{Binding SelectedItem}" AllowDeleting="True" AllowEditing="True" AddNewRowPosition="FixedTop" AddNewRowInitiating="SyncfusionGrid_AddNewRowInitiating" CurrentCellBeginEdit="SyncfusionGrid_CurrentCellBeginEdit">
                 <syncfusion:SfDataGrid.Columns>
                     <syncfusion:GridTextColumn AllowEditing="False" MappingName="Datum" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" HeaderText="Datum" ValueBinding="{Binding Path=Datum, StringFormat='MMM dd yyyy'}" />
 
@@ -50,8 +50,8 @@
                    
                     
                     <syncfusion:GridTextColumn MappingName="Zuzahlung" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Zuzahlung, StringFormat='{}{0:c}'}" />
-                    <syncfusion:GridCheckBoxColumn AllowEditing="False" MappingName="IstStorniert" HeaderText="IstStorniert"/>
-                    <syncfusion:GridCheckBoxColumn AllowEditing="False" MappingName="IstAusgebucht" HeaderText="IstAusgebucht"/>
+                    <!--<syncfusion:GridCheckBoxColumn AllowEditing="False" MappingName="IstStorniert" HeaderText="IstStorniert"/>-->
+                    <!--<syncfusion:GridCheckBoxColumn MappingName="IstAusgebucht" HeaderText="IstAusgebucht"/>-->
 
                 </syncfusion:SfDataGrid.Columns>
 

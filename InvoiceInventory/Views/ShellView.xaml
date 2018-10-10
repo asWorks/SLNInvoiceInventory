@@ -23,6 +23,8 @@
                 <Button Content="Test" x:Name="Test" Margin="10,10"/>
                 <Button Content="Add Ausgangsrechnung" x:Name="AddAusgangsRechnung" Margin="10,3"/>
                 <Button Content="Add Eingangsrechnung" x:Name="AddEingangsRechnung" Margin="10,3"/>
+                <Button Content="TestPeople" x:Name="TestPeople" Margin="10,3"/>
+
             </StackPanel>
 
         </Grid>

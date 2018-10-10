@@ -1,6 +1,7 @@
 namespace DalMySQL
 {
     using Domain.Models.Rechnungen;
+    using Domain.Models.Test;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration.Conventions;
@@ -28,6 +29,8 @@ namespace DalMySQL
         public virtual DbSet<AusgangsRechnung> AusgangsRechnungen { get; set; }
         public virtual DbSet<BuchungsReference> BuchungsReferenzen { get; set; }
         public virtual DbSet<StornoReference> StornoReferenzen { get; set; }
+
+        public virtual DbSet<TestPeople> People { get; set; }
 
 
 

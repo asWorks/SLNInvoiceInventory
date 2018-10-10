@@ -29,6 +29,7 @@
             container.PerRequest<IAddEingangsrechnungViewModel, AddEingangsrechnungViewModel>();
 
             container.PerRequest<IBaseAddRechnungViewModel, BaseAddRechnungViewModel>();
+            container.PerRequest<ITestPeopleViewModel, TestPeopleViewModel> ();
         }
 
         protected override object GetInstance(Type service, string key)

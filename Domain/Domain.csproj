@@ -51,6 +51,7 @@
     <Compile Include="Models\Rechnungen\StornoReference.cs" />
     <Compile Include="Models\Rechnungen\StornoResult_Failure.cs" />
     <Compile Include="Models\Rechnungen\StornoResult_IO.cs" />
+    <Compile Include="Models\Test\TestPeople.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201809131618056_Added AusgangsRechnungen.Designer.cs">
       <DependentUpon>201809131618056_Added AusgangsRechnungen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810101909350_People.cs" />
+    <Compile Include="Migrations\201810101909350_People.Designer.cs">
+      <DependentUpon>201810101909350_People.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809131618056_Added AusgangsRechnungen.resx">
       <DependentUpon>201809131618056_Added AusgangsRechnungen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810101909350_People.resx">
+      <DependentUpon>201810101909350_People.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
