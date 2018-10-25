@@ -2,6 +2,7 @@
 using DalMySQL;
 using Domain.Models.Rechnungen;
 using InvoiceInventory.Interfaces;
+using InvoiceInventory.ObjectCollections;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 
@@ -25,14 +26,14 @@ namespace InvoiceInventory.ViewModels
             _events = events;
             db = new InvoiceModel();
             var data = db.AusgangsRechnungen;
-            Items = new ObservableCollection<Domain.Models.Rechnungen.AusgangsRechnung>(data);
+            Items = new ContextAwareObservableCollection<Domain.Models.Rechnungen.AusgangsRechnung>(data,db);
             isEditingAllowed = true;
 
         }
 
         #region "Properties"
-        private ObservableCollection<AusgangsRechnung> _Items;
-        public ObservableCollection<AusgangsRechnung> Items
+        private ContextAwareObservableCollection<AusgangsRechnung> _Items;
+        public ContextAwareObservableCollection<AusgangsRechnung> Items
         {
             get { return _Items; }
             set

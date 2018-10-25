@@ -20,7 +20,7 @@ namespace InvoiceInventory.Views
 
         private void SyncfusionGrid_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
         {
-            throw new NotImplementedException();
+           
         }
 
         private void SyncfusionGrid_CurrentCellBeginEdit(object sender, CurrentCellBeginEditEventArgs e)
@@ -47,18 +47,18 @@ namespace InvoiceInventory.Views
         private void SyncfusionGrid_AddNewRowInitiating(object sender, Syncfusion.UI.Xaml.Grid.AddNewRowInitiatingEventArgs e)
         {
 
+            
+
+            //var x = new AusgangsRechnung(DateTime.Now, "qwertz_asdfgh");
+
+            ////x.Ausbuchen(new BuchungsReference(x, DateTime.Now, "Non2"));
+            ////x.Storno(new StornoReference(x, DateTime.Now, "None", 24));
+            //x.Zuzahlung = 11.11M;
+            //x.Netto = 12.12M;
+            //x.Umsatzsteuer = 1;
 
 
-            var x = new AusgangsRechnung(DateTime.Now, "qwertz_asdfgh");
-
-            //x.Ausbuchen(new BuchungsReference(x, DateTime.Now, "Non2"));
-            //x.Storno(new StornoReference(x, DateTime.Now, "None", 24));
-            x.Zuzahlung = 11.11M;
-            x.Netto = 12.12M;
-            x.Umsatzsteuer = 1;
-
-
-            e.NewObject = x;
+            //e.NewObject = x;
 
             ////if (this.SyncfusionGrid.View.IsAddingNew)
             ////{

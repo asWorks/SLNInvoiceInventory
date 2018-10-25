@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingDomainClasses", "TestingDomainClasses\TestingDomainClasses.csproj", "{80EF45D4-3377-480A-B3F8-FC7FA4EC8130}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{84EE90B0-5098-44F5-9B33-AD7A6AEF9570}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesTests", "ServicesTests\ServicesTests.csproj", "{4D051E80-24CA-4A47-9CEF-B7E0D1529A24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{80EF45D4-3377-480A-B3F8-FC7FA4EC8130}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80EF45D4-3377-480A-B3F8-FC7FA4EC8130}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80EF45D4-3377-480A-B3F8-FC7FA4EC8130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84EE90B0-5098-44F5-9B33-AD7A6AEF9570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84EE90B0-5098-44F5-9B33-AD7A6AEF9570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84EE90B0-5098-44F5-9B33-AD7A6AEF9570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84EE90B0-5098-44F5-9B33-AD7A6AEF9570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D051E80-24CA-4A47-9CEF-B7E0D1529A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D051E80-24CA-4A47-9CEF-B7E0D1529A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D051E80-24CA-4A47-9CEF-B7E0D1529A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D051E80-24CA-4A47-9CEF-B7E0D1529A24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

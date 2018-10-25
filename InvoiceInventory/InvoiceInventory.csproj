@@ -51,9 +51,18 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
-    <Reference Include="Syncfusion.Data.WPF, Version=16.2460.0.41, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.SfGrid.WPF, Version=16.2460.0.41, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.Shared.Wpf, Version=16.2460.0.41, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Data.WPF, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>G:\Install\Syncfusion\WPF\16.3.0.21\Assemblies\4.6\Syncfusion.Data.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>G:\Install\Syncfusion\WPF\16.3.0.21\Assemblies\4.6\Syncfusion.SfGrid.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>G:\Install\Syncfusion\WPF\16.3.0.21\Assemblies\4.6\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -91,6 +100,7 @@
     <Compile Include="Interfaces\IInvoiceViewModel.cs" />
     <Compile Include="Interfaces\ITestViewModel.cs" />
     <Compile Include="Interfaces\IShellViewModel.cs" />
+    <Compile Include="ObjectCollections\ContextAwareObservableCollection.cs" />
     <Compile Include="ViewModels\AddEingangsrechnungViewModel.cs" />
     <Compile Include="ViewModels\AddAusgangsrechnungViewModel.cs" />
     <Compile Include="ViewModels\BaseAddRechnungViewModel.cs" />
@@ -170,6 +180,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{616df6e9-b502-46dd-9165-6629aa5796da}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{84ee90b0-5098-44f5-9b33-ad7a6aef9570}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

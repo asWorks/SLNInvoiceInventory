@@ -2,6 +2,7 @@
 using DalMySQL;
 using Domain.Models.Test;
 using InvoiceInventory.Interfaces;
+using InvoiceInventory.ObjectCollections;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 
@@ -25,7 +26,7 @@ namespace InvoiceInventory.ViewModels
             //db.SaveChanges();
 
             
-            People = new ObservableCollection<TestPeople>(db.People);
+            People = new ContextAwareObservableCollection<TestPeople>(db.People,db);
 
 
 
@@ -47,8 +48,8 @@ namespace InvoiceInventory.ViewModels
 
         }
 
-        private ObservableCollection<TestPeople> _People;
-        public ObservableCollection<TestPeople> People
+        private ContextAwareObservableCollection<TestPeople> _People;
+        public ContextAwareObservableCollection<TestPeople> People
         {
             get { return _People; }
             set
@@ -64,9 +65,9 @@ namespace InvoiceInventory.ViewModels
 
         public void Save()
         {
-            var p = new TestPeople { ForeName = "Stefan", LastName = "Stöver" };
-            People.Add(p);
-            var n =  db.SaveChanges();
+            //var p = new TestPeople { ForeName = "Stefan", LastName = "Stöver" };
+            //People.Add(p);
+            //var n =  db.SaveChanges();
         }
     }
 }

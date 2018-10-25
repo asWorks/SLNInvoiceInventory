@@ -9,8 +9,8 @@ namespace Contracts.Domain.Interfaces
     public interface IInvoice
     {
         int RechnungsId { get; }
-        DateTime? Datum { get;}
-        string RechnungsNummer { get; }
+        DateTime? Datum { get; set; }
+        string RechnungsNummer { get; set; }
         bool IstStorniert { get; }
         bool IstAusgebucht { get; }
 
