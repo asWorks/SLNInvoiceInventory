@@ -25,23 +25,23 @@ namespace InvoiceInventory.Views
 
         private void SyncfusionGrid_CurrentCellBeginEdit(object sender, CurrentCellBeginEditEventArgs e)
         {
-            var rowIndex = e.RowColumnIndex.RowIndex;
+            //var rowIndex = e.RowColumnIndex.RowIndex;
 
-            //If the rowindex in AddNewRowIndex, we need to validate whether the property is readonly or not.
-            if (this.SyncfusionGrid.IsAddNewIndex(rowIndex))
-            {
-                //pdc - PropertyDescriptorCollection.
-                var pdc = this.SyncfusionGrid.View.GetItemProperties();
+            ////If the rowindex in AddNewRowIndex, we need to validate whether the property is readonly or not.
+            //if (this.SyncfusionGrid.IsAddNewIndex(rowIndex))
+            //{
+            //    //pdc - PropertyDescriptorCollection.
+            //    var pdc = this.SyncfusionGrid.View.GetItemProperties();
 
-                //get the propertyinfo from PropertyDescriptorCollection.
-                var propertyInfo = pdc.Find(e.Column.MappingName, true);
+            //    //get the propertyinfo from PropertyDescriptorCollection.
+            //    var propertyInfo = pdc.Find(e.Column.MappingName, true);
 
-                //property is readonly you can cancel the editing of the cell.
-                if (propertyInfo.IsReadOnly)
-                {
-                    e.Cancel = true;
-                }
-            }
+            //    //property is readonly you can cancel the editing of the cell.
+            //    if (propertyInfo.IsReadOnly)
+            //    {
+            //        e.Cancel = true;
+            //    }
+            //}
         }
 
         private void SyncfusionGrid_AddNewRowInitiating(object sender, Syncfusion.UI.Xaml.Grid.AddNewRowInitiatingEventArgs e)

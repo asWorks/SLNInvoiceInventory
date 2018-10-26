@@ -5,9 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InvoiceInventory"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:vm="clr-namespace:InvoiceInventory.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
+    <!--<UserControl.DataContext>
+        <vm:TestViewModel/>
+    </UserControl.DataContext>-->
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,30 +30,32 @@
             <StackPanel Orientation="Horizontal">
                 <CheckBox x:Name="isEditingAllowed"/>
             </StackPanel>
-            
-            
+
+            <!--CellStyle="{StaticResource CellStyle}"-->
             <syncfusion:SfDataGrid Grid.Row="1" x:Name="SyncfusionGrid"
-                                   
+                                   Margin="100,20,500,10"
                                        NavigationMode="Cell"
                                        AutoGenerateColumns="False"
                                        BorderThickness="0"
-                                       CellStyle="{StaticResource CellStyle}"
+                                    CellStyle="{StaticResource CellStyle}"
                                        ColumnSizer="Star"
                                        Background="White"
                                        HeaderRowHeight="25"
                                        ItemsSource="{Binding Items}"
                                        SelectionMode="Single"
                                        RowHeight="25"
-                                   SelectedItem="{Binding SelectedItem}" AllowDeleting="True" AllowEditing="True" AddNewRowPosition="FixedTop" AddNewRowInitiating="SyncfusionGrid_AddNewRowInitiating" CurrentCellBeginEdit="SyncfusionGrid_CurrentCellBeginEdit">
+                                   SelectedItem="{Binding SelectedItem}" AllowDeleting="True"  AddNewRowPosition="FixedTop" AddNewRowInitiating="SyncfusionGrid_AddNewRowInitiating" CurrentCellBeginEdit="SyncfusionGrid_CurrentCellBeginEdit" AllowEditing="{Binding isEditingAllowed}">
                 <syncfusion:SfDataGrid.Columns>
-                    <syncfusion:GridDateTimeColumn AllowEditing="True" MappingName="Datum" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" HeaderText="Datum" ValueBinding="{Binding Path=Datum, StringFormat='MMM dd yyyy',Mode=TwoWay}" />
-
-                    <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsId" MappingName="RechnungsId" />
-                    <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsNummer" ValueBinding="{Binding Path=RechnungsNummer,Mode=OneTime}" />
-                    <syncfusion:GridCurrencyColumn MappingName="Netto" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Netto, StringFormat='{}{0:c}',Mode=TwoWay}" />
-                   
                     
-                    <syncfusion:GridTextColumn MappingName="Zuzahlung" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Zuzahlung, StringFormat='{}{0:c}',Mode=TwoWay}" />
+                     <syncfusion:GridTextColumn AllowEditing="False" Width="60" HeaderText= "Id" MappingName="RechnungsId" />
+                    <syncfusion:GridDateTimeColumn MappingName="Datum" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" HeaderText="Datum" ValueBinding="{Binding Path=Datum, StringFormat='MMM dd yyyy',Mode=TwoWay}" />
+
+                   
+                    <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsNummer" ValueBinding="{Binding Path=RechnungsNummer,Mode=OneTime}" />
+                    <syncfusion:GridCurrencyColumn MappingName="Netto" Width="100" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Netto, StringFormat='{}{0:c}',Mode=TwoWay}" />
+
+
+                    <syncfusion:GridTextColumn MappingName="Zuzahlung" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Zuzahlung, StringFormat='{}{0:c}',Mode=TwoWay}" AllowEditing="{Binding isEditingAllowed}" />
                     <!--<syncfusion:GridCheckBoxColumn AllowEditing="False" MappingName="IstStorniert" HeaderText="IstStorniert"/>-->
                     <!--<syncfusion:GridCheckBoxColumn MappingName="IstAusgebucht" HeaderText="IstAusgebucht"/>-->
 

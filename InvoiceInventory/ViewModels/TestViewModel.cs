@@ -1,10 +1,12 @@
 ﻿using Caliburn.Micro;
+using System.Linq;
 using DalMySQL;
 using Domain.Models.Rechnungen;
 using InvoiceInventory.Interfaces;
 using InvoiceInventory.ObjectCollections;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Data.Entity;
 
 namespace InvoiceInventory.ViewModels
 
@@ -16,7 +18,10 @@ namespace InvoiceInventory.ViewModels
         private readonly IEventAggregator _events;
         private InvoiceModel db = null;
 
+        public TestViewModel()
+        {
 
+        }
 
 
 
@@ -25,9 +30,11 @@ namespace InvoiceInventory.ViewModels
         {
             _events = events;
             db = new InvoiceModel();
-            var data = db.AusgangsRechnungen;
+
+
+            var data = db.AusgangsRechnungen.OrderBy(n => n.RechnungsId);
             Items = new ContextAwareObservableCollection<Domain.Models.Rechnungen.AusgangsRechnung>(data,db);
-            isEditingAllowed = true;
+            isEditingAllowed = false;
 
         }
 
