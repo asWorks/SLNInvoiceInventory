@@ -1,12 +1,12 @@
 ﻿using Caliburn.Micro;
-using System.Linq;
 using DalMySQL;
 using Domain.Models.Rechnungen;
 using InvoiceInventory.Interfaces;
 using InvoiceInventory.ObjectCollections;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Data.Entity;
+using System.Linq;
 
 namespace InvoiceInventory.ViewModels
 
@@ -15,9 +15,12 @@ namespace InvoiceInventory.ViewModels
     public class TestViewModel : Screen, ITestViewModel
     {
 
+        #region "Fields"
         private readonly IEventAggregator _events;
         private InvoiceModel db = null;
+        #endregion
 
+        #region "Constructors"
         public TestViewModel()
         {
 
@@ -32,11 +35,13 @@ namespace InvoiceInventory.ViewModels
             db = new InvoiceModel();
 
 
-            var data = db.AusgangsRechnungen.OrderBy(n => n.RechnungsId);
-            Items = new ContextAwareObservableCollection<Domain.Models.Rechnungen.AusgangsRechnung>(data,db);
             isEditingAllowed = false;
-
+            MonthToShow = new ObservableCollection<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            SelectedMonthToShow = DateTime.Now.Month;
+            UpdateData();
         }
+
+        #endregion
 
         #region "Properties"
         private ContextAwareObservableCollection<AusgangsRechnung> _Items;
@@ -88,7 +93,48 @@ namespace InvoiceInventory.ViewModels
             }
         }
 
+        private ObservableCollection<int> _MonthToShow;
+        public ObservableCollection<int> MonthToShow
+        {
+            get { return _MonthToShow; }
+            set
+            {
+                if (value != _MonthToShow)
+                {
+                    _MonthToShow = value;
+                    NotifyOfPropertyChange(() => MonthToShow);
 
+                }
+            }
+        }
+
+        private int _SelectedMonthToShow;
+        public int SelectedMonthToShow
+        {
+            get { return _SelectedMonthToShow; }
+            set
+            {
+                if (value != _SelectedMonthToShow)
+                {
+                    _SelectedMonthToShow = value;
+                    NotifyOfPropertyChange(() => SelectedMonthToShow);
+                    UpdateData();
+
+                }
+            }
+        }
+
+
+
+
+        #endregion
+
+        #region "Methods"
+        private void UpdateData()
+        {
+            var data = db.AusgangsRechnungen.Where(n => n.Datum.Value.Month == SelectedMonthToShow);
+            Items = new ContextAwareObservableCollection<AusgangsRechnung>(data, db);
+        }
         #endregion
 
         #region "CommandMethods"

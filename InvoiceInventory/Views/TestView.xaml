@@ -29,6 +29,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <CheckBox x:Name="isEditingAllowed"/>
+                <ComboBox x:Name="MonthToShow" SelectedItem="{Binding SelectedMonthToShow,Mode=TwoWay}"/>
             </StackPanel>
 
             <!--CellStyle="{StaticResource CellStyle}"-->
@@ -60,6 +61,22 @@
                     <!--<syncfusion:GridCheckBoxColumn MappingName="IstAusgebucht" HeaderText="IstAusgebucht"/>-->
 
                 </syncfusion:SfDataGrid.Columns>
+                <syncfusion:SfDataGrid.TableSummaryRows>
+                    <syncfusion:GridTableSummaryRow Title=" Summe Zuzahlungen : {SummeZuzahlung} für {AnzahlRechnungen} Rechnungen " ShowSummaryInRow="True">
+                        <syncfusion:GridSummaryRow.SummaryColumns>
+                            <syncfusion:GridSummaryColumn Name="SummeZuzahlung"
+                                                Format="'{Sum:c}'"
+                                                MappingName="Zuzahlung"
+                                                SummaryType="DoubleAggregate" />
+
+                            <syncfusion:GridSummaryColumn Name="AnzahlRechnungen"
+                                                Format="'{Count:d}'"
+                                                MappingName="RechnungsId"
+                                                SummaryType="CountAggregate" />
+
+                        </syncfusion:GridSummaryRow.SummaryColumns>
+                    </syncfusion:GridTableSummaryRow>
+                </syncfusion:SfDataGrid.TableSummaryRows>
 
             </syncfusion:SfDataGrid>
             <StackPanel Orientation="Horizontal" Grid.Row="2">
