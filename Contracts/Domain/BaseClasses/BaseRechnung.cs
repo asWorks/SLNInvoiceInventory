@@ -32,21 +32,20 @@ namespace Contracts.Domain.BaseClasses
         public int RechnungsId { get; private set; }
         //public DateTime? Datum { get; private set; }
 
-        private DateTime? _Datum;
-        public DateTime? Datum
+        private DateTime _Datum;
+        public DateTime Datum
         {
             get { return _Datum; }
             set
             {
-                if (_Datum == null)
-                {
+               
                     if (value != _Datum)
                     {
 
                         _Datum = value;
 
                     }
-                }
+               
 
             }
         }

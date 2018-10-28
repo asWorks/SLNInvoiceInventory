@@ -71,6 +71,14 @@
     <Compile Include="Migrations\201810101909350_People.Designer.cs">
       <DependentUpon>201810101909350_People.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810281839585_Changed DateTime in Invoices to not nullable.cs" />
+    <Compile Include="Migrations\201810281839585_Changed DateTime in Invoices to not nullable.Designer.cs">
+      <DependentUpon>201810281839585_Changed DateTime in Invoices to not nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810282002241_Added Brutto to Ausgangsrechnungen.cs" />
+    <Compile Include="Migrations\201810282002241_Added Brutto to Ausgangsrechnungen.Designer.cs">
+      <DependentUpon>201810282002241_Added Brutto to Ausgangsrechnungen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +101,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810101909350_People.resx">
       <DependentUpon>201810101909350_People.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810281839585_Changed DateTime in Invoices to not nullable.resx">
+      <DependentUpon>201810281839585_Changed DateTime in Invoices to not nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810282002241_Added Brutto to Ausgangsrechnungen.resx">
+      <DependentUpon>201810282002241_Added Brutto to Ausgangsrechnungen.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

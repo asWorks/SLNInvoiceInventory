@@ -91,6 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateTime2MonthConverter.cs" />
     <Compile Include="Converters\GridCellColorConverter.cs" />
     <Compile Include="Converters\SortDirectionToVisibilityConverter.cs" />
     <Compile Include="Converters\SortDirectionToWidthConverter.cs" />
