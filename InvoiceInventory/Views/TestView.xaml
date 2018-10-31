@@ -56,7 +56,6 @@
                     <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsNummer" ValueBinding="{Binding Path=RechnungsNummer,Mode=OneTime}" />
                     <syncfusion:GridCurrencyColumn MappingName="Netto" Width="100" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Netto, StringFormat='{}{0:c}',Mode=TwoWay}" />
 
-
                     <syncfusion:GridTextColumn MappingName="Zuzahlung" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Zuzahlung, StringFormat='{}{0:c}',Mode=TwoWay}" AllowEditing="{Binding isEditingAllowed}" />
 
                     <syncfusion:GridTextColumn MappingName="Brutto" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Brutto, StringFormat='{}{0:c}',Mode=TwoWay}" AllowEditing="{Binding isEditingAllowed}" />
@@ -66,12 +65,23 @@
 
                 </syncfusion:SfDataGrid.Columns>
                 <syncfusion:SfDataGrid.GroupSummaryRows>
-                    <syncfusion:GridTableSummaryRow Title=" Summe Zuzahlungen : {SummeZuzahlung} für {AnzahlRechnungen} Rechnungen " ShowSummaryInRow="True">
+                    <syncfusion:GridTableSummaryRow Title="Summe Netto : {SummeNetto} , Summe Zuzahlungen : {SummeZuzahlung} , Summe Brutto : {SummeBrutto} für {AnzahlRechnungen} Rechnungen " ShowSummaryInRow="True">
                         <syncfusion:GridSummaryRow.SummaryColumns>
                             <syncfusion:GridSummaryColumn Name="SummeZuzahlung"
                                                 Format="'{Sum:c}'"
                                                 MappingName="Zuzahlung"
                                                 SummaryType="DoubleAggregate" />
+
+                            <syncfusion:GridSummaryColumn Name="SummeNetto"
+                                                Format="'{Sum:c}'"
+                                                MappingName="Netto"
+                                                SummaryType="DoubleAggregate" />
+
+                            <syncfusion:GridSummaryColumn Name="SummeBrutto"
+                                                Format="'{Sum:c}'"
+                                                MappingName="Brutto"
+                                                SummaryType="DoubleAggregate" />
+
 
                             <syncfusion:GridSummaryColumn Name="AnzahlRechnungen"
                                                 Format="'{Count:d}'"
@@ -82,7 +92,7 @@
                     </syncfusion:GridTableSummaryRow>
                 </syncfusion:SfDataGrid.GroupSummaryRows>
                 <syncfusion:SfDataGrid.GroupColumnDescriptions>
-                    <syncfusion:GroupColumnDescription ColumnName="Datum" Converter="{StaticResource CustomDateTime2MonthConverter}" />
+                    <syncfusion:GroupColumnDescription ColumnName="Monat" Converter="{StaticResource CustomDateTime2MonthConverter}" />
                 </syncfusion:SfDataGrid.GroupColumnDescriptions>
 
             </syncfusion:SfDataGrid>
