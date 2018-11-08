@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Contracts.Domain.BaseClasses
 {
-    public class BaseRechnung : IInvoice
+    public abstract class BaseRechnung : IInvoice
     {
 
         public BaseRechnung(string rechnungsnummer, DateTime datum)
@@ -20,8 +20,7 @@ namespace Contracts.Domain.BaseClasses
 
             RechnungsNummer = rechnungsnummer;
             Datum = datum;
-            IstStorniert = false;
-            IstAusgebucht = false;
+           
         }
 
         protected BaseRechnung()
@@ -29,7 +28,7 @@ namespace Contracts.Domain.BaseClasses
 
         }
         [Key]
-        public int RechnungsId { get; private set; }
+        public int RechnungsId { get; protected set; }
         //public DateTime? Datum { get; private set; }
 
         private DateTime _Datum;
@@ -68,25 +67,6 @@ namespace Contracts.Domain.BaseClasses
             }
         }
 
-        
-        public bool IstStorniert { get; private set; }
-        public bool IstAusgebucht { get; private set; }
-
-        public virtual bool Storno(IStornoReference stornoReference)
-        {
-            IstStorniert = true;
-            return true;
-        }
-
-        public bool Ausbuchen(IBuchungsReference buchungsTemplate)
-        {
-            if (buchungsTemplate != null)
-            {
-                buchungsTemplate.Rechnung = this;
-            }
-            IstAusgebucht = true;
-            return true;
-        }
-
+   
     }
 }

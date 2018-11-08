@@ -79,6 +79,10 @@
     <Compile Include="Migrations\201810282002241_Added Brutto to Ausgangsrechnungen.Designer.cs">
       <DependentUpon>201810282002241_Added Brutto to Ausgangsrechnungen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811081722001_Turned to abstract classes.cs" />
+    <Compile Include="Migrations\201811081722001_Turned to abstract classes.Designer.cs">
+      <DependentUpon>201811081722001_Turned to abstract classes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810282002241_Added Brutto to Ausgangsrechnungen.resx">
       <DependentUpon>201810282002241_Added Brutto to Ausgangsrechnungen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811081722001_Turned to abstract classes.resx">
+      <DependentUpon>201811081722001_Turned to abstract classes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

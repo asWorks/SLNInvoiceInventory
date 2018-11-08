@@ -1,4 +1,5 @@
 ﻿using Contracts.Domain.BaseClasses;
+using Contracts.Domain.Interfaces;
 using System;
 
 namespace Domain.Models.Rechnungen
@@ -18,6 +19,26 @@ namespace Domain.Models.Rechnungen
 
         public decimal? Umsatzsteuer { get; set; }
         ////public decimal Netto { get; set; }
+
+
+        public bool IstStorniert { get; private set; }
+        public bool IstAusgebucht { get; private set; }
+
+        public virtual bool Storno(IStornoReference stornoReference)
+        {
+            IstStorniert = true;
+            return true;
+        }
+
+        public bool Ausbuchen(IBuchungsReference buchungsTemplate)
+        {
+            if (buchungsTemplate != null)
+            {
+                buchungsTemplate.Rechnung = this;
+            }
+            IstAusgebucht = true;
+            return true;
+        }
 
 
         private decimal _Netto;

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\AbstractClasses\AbstractRechnung.cs" />
     <Compile Include="Domain\BaseClasses\BaseAdresse.cs" />
     <Compile Include="Domain\BaseClasses\BaseKontaktDatum.cs" />
     <Compile Include="Domain\BaseClasses\BaseRechnung.cs" />

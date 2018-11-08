@@ -20,37 +20,25 @@ namespace Domain.Models.Rechnungen
 
         }
 
-        //[Key]
-        //public int RechnungsId { get; private set; }
-        //public DateTime Datum { get; private set; }
-        //public string RechnungsNummer { get; private set; }
-        //public bool istStorniert { get; private set; }
-        //public bool IstAusgebucht { get; private set; }
 
-        //public IStornoResult Storno(IStornoReference stornoReference)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public bool IstStorniert { get; private set; }
+        public bool IstAusgebucht { get; private set; }
 
-        //public IBuchungsResult Ausbuchen(IBuchungsReference buchungsTemplate)
-        //{
-        //    IBuchungsResult res;
-        //    if (IstAusgebucht==false)
-        //    {
-        //        res = new BuchungsResult_IO(this, "OK");
-        //        IstAusgebucht = true;
-        //        res.excute();
-        //         return res;
-        //    }
-        //    else
-        //    {
-        //        res = new BuchungsResult_Failure(this, "Rechnung ist bereits ausgebucht.");
-        //        res.excute();
-        //        return res;
-        //    }
+        public virtual bool Storno(IStornoReference stornoReference)
+        {
+            IstStorniert = true;
+            return true;
+        }
 
-           
-        //}
+        public bool Ausbuchen(IBuchungsReference buchungsTemplate)
+        {
+            if (buchungsTemplate != null)
+            {
+                buchungsTemplate.Rechnung = this;
+            }
+            IstAusgebucht = true;
+            return true;
+        }
 
     }
 }
