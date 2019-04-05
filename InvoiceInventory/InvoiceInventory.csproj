@@ -123,6 +123,9 @@
     <Compile Include="Views\AddAusgangsrechnungView.xaml.cs">
       <DependentUpon>AddAusgangsrechnungView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AusgangsrechnungenView.xaml.cs">
+      <DependentUpon>AusgangsrechnungenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BaseAddRechnungView.xaml.cs">
       <DependentUpon>BaseAddRechnungView.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Domain.Models.Rechnungen.AusgangsRechnung.datasource" />
+    <None Include="Properties\DataSources\Domain.Models.Rechnungen.EingangsRechnung.datasource" />
+    <None Include="Properties\DataSources\Domain.Models.Rechnungen.Lieferant.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -189,6 +195,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="StandardRessources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +208,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddAusgangsrechnungView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AusgangsrechnungenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

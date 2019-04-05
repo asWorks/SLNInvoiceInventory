@@ -60,6 +60,10 @@
       <Name>Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Properties\DataSources\Domain.Models.Rechnungen.AusgangsRechnung.datasource" />
+    <None Include="Properties\DataSources\Domain.Models.Rechnungen.EingangsRechnung.datasource" />
+    <None Include="Properties\DataSources\Domain.Models.Rechnungen.Lieferant.datasource" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

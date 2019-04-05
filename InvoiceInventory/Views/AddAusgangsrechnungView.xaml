@@ -14,6 +14,8 @@
                 <Label Content="Zuzahlung"/>
                 <TextBox x:Name="Zuzahlung"/>
             </StackPanel>
+            <Button x:Name="SaveData" Content="Save"/>
+            <Button x:Name="ClearFields" Content="Clear"/>
 
         </StackPanel>
 

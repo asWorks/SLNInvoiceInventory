@@ -6,11 +6,14 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DalMySQL;
+using Domain.Models.Rechnungen;
+
 
 namespace InvoiceInventory.ViewModels
 {
     [Export(typeof(IAddAusgangsrechnungViewModel))]
-   public class AddAusgangsrechnungViewModel:Screen,IAddAusgangsrechnungViewModel
+    public class AddAusgangsrechnungViewModel : Screen, IAddAusgangsrechnungViewModel
     {
 
         [ImportingConstructor]
@@ -49,6 +52,48 @@ namespace InvoiceInventory.ViewModels
                     //  isDirty = true;
                 }
             }
+        }
+
+        public void SaveData()
+        {
+            var x = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+            if (x.Datum.HasValue)
+            {
+
+                var RefRechnung = new AusgangsRechnung(x.Datum.Value, x.RechnungsNummer);
+                var ar = new AusgangsRechnung(x.Datum.Value, x.RechnungsNummer);
+                if (x.istStorniert)
+                {
+                    ar.Storno(new StornoReference(RefRechnung, DateTime.Now, "Mußte Sein", 23));
+                }
+                if (x.IstAusgebucht)
+                {
+                    ar.Ausbuchen(new BuchungsReference(RefRechnung, DateTime.Now, "Mußte Sein"));
+                }
+
+
+                ar.Zuzahlung = Zuzahlung;
+
+                using (var db = new InvoiceModel())
+                {
+                    db.AusgangsRechnungen.Add(ar);
+                    db.SaveChanges();
+                }
+
+
+            }
+
+        }
+
+        public void ClearFields()
+        {
+            var x = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+            x.ClearFields();
+            NotifyOfPropertyChange(() => BaseAddRechnungViewVM);
+            Zuzahlung = 0;
+
+
+
         }
     }
 }
