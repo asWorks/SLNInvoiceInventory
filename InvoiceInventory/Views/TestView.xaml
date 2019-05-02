@@ -46,14 +46,14 @@
                                        ItemsSource="{Binding Items}"
                                        SelectionMode="Single"
                                        RowHeight="25"
-                                   SelectedItem="{Binding SelectedItem}" AllowDeleting="True"  AddNewRowPosition="FixedTop" AddNewRowInitiating="SyncfusionGrid_AddNewRowInitiating" CurrentCellBeginEdit="SyncfusionGrid_CurrentCellBeginEdit" AllowEditing="{Binding isEditingAllowed}">
+                                   SelectedItem="{Binding SelectedItem}" AllowDeleting="True"  AddNewRowPosition="FixedTop" AddNewRowInitiating="SyncfusionGrid_AddNewRowInitiating" CurrentCellBeginEdit="SyncfusionGrid_CurrentCellBeginEdit" AllowEditing="{Binding isEditingAllowed}" RowValidated="SyncfusionGrid_RowValidated" RowValidating="SyncfusionGrid_RowValidating">
                 <syncfusion:SfDataGrid.Columns>
                     
                      <syncfusion:GridTextColumn AllowEditing="False" Width="100" HeaderText= "Id" MappingName="RechnungsId" />
                    
                     <syncfusion:GridDateTimeColumn MappingName="Datum" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" HeaderText="Datum" ValueBinding="{Binding Path=Datum, StringFormat='MMM dd yyyy',Mode=TwoWay}" />
 
-                    <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsNummer" ValueBinding="{Binding Path=RechnungsNummer,Mode=OneTime}" />
+                    <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsNummer" ValueBinding="{Binding Path=RechnungsNummer,Mode=TwoWay}" />
                     <syncfusion:GridCurrencyColumn MappingName="Netto" Width="100" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Netto, StringFormat='{}{0:c}',Mode=TwoWay}" />
 
                     <syncfusion:GridTextColumn MappingName="Zuzahlung" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Zuzahlung, StringFormat='{}{0:c}',Mode=TwoWay}" AllowEditing="{Binding isEditingAllowed}" />

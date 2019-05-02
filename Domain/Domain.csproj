@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Rechnungen\AusgangsRechnung.cs" />
+    <Compile Include="Models\Rechnungen\AusgangsrechnungBlank.cs" />
     <Compile Include="Models\Rechnungen\BuchungsReference.cs" />
     <Compile Include="Models\Rechnungen\BuchungsResult_Failure.cs" />
     <Compile Include="Models\Rechnungen\BuchungsResult_IO.cs" />

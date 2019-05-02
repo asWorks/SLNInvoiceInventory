@@ -132,8 +132,8 @@ namespace InvoiceInventory.ViewModels
         #region "Methods"
         private void UpdateData()
         {
-            //var data = db.AusgangsRechnungen.Where(n => n.Datum.Value.Month == SelectedMonthToShow);
-            var data = db.AusgangsRechnungen;
+            var data = db.AusgangsRechnungen.Where(n => n.Datum.Month == SelectedMonthToShow);
+            //var data = db.AusgangsRechnungen;
 
             Items = new ContextAwareObservableCollection<AusgangsRechnung>(data, db);
         }
