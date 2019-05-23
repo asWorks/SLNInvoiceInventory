@@ -1,10 +1,12 @@
-﻿using Contracts.Domain.Interfaces;
+﻿using Caliburn.Micro;
+using Contracts.Domain.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Windows;
 
 namespace Contracts.Domain.BaseClasses
 {
-    public class BaseRechnung : IInvoice
+    public class BaseRechnung :Screen, IInvoice
     {
 
         public BaseRechnung(string rechnungsnummer, DateTime datum)
@@ -24,10 +26,11 @@ namespace Contracts.Domain.BaseClasses
             IstAusgebucht = false;
         }
 
-        protected BaseRechnung()
+        public BaseRechnung()
         {
 
         }
+
         [Key]
         public int RechnungsId { get; private set; }
         //public DateTime? Datum { get; private set; }
@@ -68,13 +71,54 @@ namespace Contracts.Domain.BaseClasses
             }
         }
 
-        
-        public bool IstStorniert { get; private set; }
-        public bool IstAusgebucht { get; private set; }
+
+
+        private bool _IstStorniert;
+        public bool IstStorniert
+        {
+            get { return _IstStorniert; }
+            set
+            {
+                if (value != _IstStorniert)
+                {
+                    _IstStorniert = value;
+                    NotifyOfPropertyChange(() => IstStorniert);
+                    //  isDirty = true;
+                }
+            }
+        }
+
+
+        private bool _IstAusgebucht;
+        public bool IstAusgebucht
+        {
+            get { return _IstAusgebucht; }
+            set
+            {
+                if (value != _IstAusgebucht)
+                {
+                    _IstAusgebucht = value;
+                    NotifyOfPropertyChange(() => IstAusgebucht);
+                    //  isDirty = true;
+                }
+            }
+        }
+
+       
 
         public virtual bool Storno(IStornoReference stornoReference)
         {
             IstStorniert = true;
+            return true;
+        }
+
+        public bool Ausbuche(object context)
+        {
+            //if (buchungsTemplate != null)
+            //{
+            //    //buchungsTemplate.Rechnung = this;
+            //}
+            IstAusgebucht = true;
             return true;
         }
 

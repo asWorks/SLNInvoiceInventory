@@ -15,6 +15,7 @@ namespace InvoiceInventory.Views
             InitializeComponent();
             SyncfusionGrid.CurrentCellBeginEdit += SyncfusionGrid_CurrentCellBeginEdit;
             SyncfusionGrid.CurrentCellEndEdit += SyncfusionGrid_CurrentCellEndEdit;
+           
         }
 
         private void SyncfusionGrid_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
@@ -46,9 +47,9 @@ namespace InvoiceInventory.Views
         private void SyncfusionGrid_AddNewRowInitiating(object sender, Syncfusion.UI.Xaml.Grid.AddNewRowInitiatingEventArgs e)
         {
 
-            var data = e.NewObject as AusgangsrechnungBlank;
+            var data = e.NewObject as AusgangsRechnung;
             data.Datum = DateTime.Now;
-            data.RechnungsNummer = "AR-00-";
+            //data.RechnungsNummer = "AR-00-";
 
 
 
@@ -56,12 +57,14 @@ namespace InvoiceInventory.Views
 
         private void SyncfusionGrid_RowValidated(object sender, RowValidatedEventArgs e)
         {
-            var x = e.RowData as AusgangsrechnungBlank;
+            //var x = e.RowData as AusgangsrechnungBlank;
         }
 
         private void SyncfusionGrid_RowValidating(object sender, RowValidatingEventArgs e)
         {
-            var x = e.RowData as AusgangsrechnungBlank;
+            //var x = e.RowData as AusgangsrechnungBlank;
         }
+
+      
     }
 }

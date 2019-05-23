@@ -79,6 +79,10 @@
     <Compile Include="Migrations\201810282002241_Added Brutto to Ausgangsrechnungen.Designer.cs">
       <DependentUpon>201810282002241_Added Brutto to Ausgangsrechnungen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905231427084_Keine Ahnung was ich geändert habe.cs" />
+    <Compile Include="Migrations\201905231427084_Keine Ahnung was ich geändert habe.Designer.cs">
+      <DependentUpon>201905231427084_Keine Ahnung was ich geändert habe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810282002241_Added Brutto to Ausgangsrechnungen.resx">
       <DependentUpon>201810282002241_Added Brutto to Ausgangsrechnungen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905231427084_Keine Ahnung was ich geändert habe.resx">
+      <DependentUpon>201905231427084_Keine Ahnung was ich geändert habe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

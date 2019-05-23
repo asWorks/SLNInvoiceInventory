@@ -11,7 +11,7 @@ namespace Domain.Models.Rechnungen
 
         }
 
-        private AusgangsRechnung() : base()
+        public AusgangsRechnung() : base()
         {
 
         }

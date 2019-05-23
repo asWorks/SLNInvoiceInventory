@@ -7,6 +7,7 @@
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:vm="clr-namespace:InvoiceInventory.ViewModels"
              xmlns:conv="clr-namespace:InvoiceInventory.Converters"
+              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
@@ -48,20 +49,31 @@
                                        RowHeight="25"
                                    SelectedItem="{Binding SelectedItem}" AllowDeleting="True"  AddNewRowPosition="FixedTop" AddNewRowInitiating="SyncfusionGrid_AddNewRowInitiating" CurrentCellBeginEdit="SyncfusionGrid_CurrentCellBeginEdit" AllowEditing="{Binding isEditingAllowed}" RowValidated="SyncfusionGrid_RowValidated" RowValidating="SyncfusionGrid_RowValidating">
                 <syncfusion:SfDataGrid.Columns>
-                    
-                     <syncfusion:GridTextColumn AllowEditing="False" Width="100" HeaderText= "Id" MappingName="RechnungsId" />
-                   
+
+                    <syncfusion:GridTextColumn AllowEditing="False" Width="100" HeaderText= "Id" MappingName="RechnungsId" />
+
                     <syncfusion:GridDateTimeColumn MappingName="Datum" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" HeaderText="Datum" ValueBinding="{Binding Path=Datum, StringFormat='MMM dd yyyy',Mode=TwoWay}" />
 
                     <syncfusion:GridTextColumn AllowEditing="False" HeaderText="RechnungsNummer" ValueBinding="{Binding Path=RechnungsNummer,Mode=TwoWay}" />
+                   
                     <syncfusion:GridCurrencyColumn MappingName="Netto" Width="100" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Netto, StringFormat='{}{0:c}',Mode=TwoWay}" />
 
                     <syncfusion:GridTextColumn MappingName="Zuzahlung" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Zuzahlung, StringFormat='{}{0:c}',Mode=TwoWay}" AllowEditing="{Binding isEditingAllowed}" />
 
                     <syncfusion:GridTextColumn MappingName="Brutto" CellStyle="{StaticResource AmountCellStyle}" HorizontalHeaderContentAlignment="Right" TextAlignment="Right" ValueBinding="{Binding Path=Brutto, StringFormat='{}{0:c}',Mode=TwoWay}" AllowEditing="{Binding isEditingAllowed}" />
 
-                    <!--<syncfusion:GridCheckBoxColumn AllowEditing="False" MappingName="IstStorniert" HeaderText="IstStorniert"/>-->
+                    <syncfusion:GridCheckBoxColumn  MappingName="IstStorniert" HeaderText="IstStorniert"/>
                     <!--<syncfusion:GridCheckBoxColumn MappingName="IstAusgebucht" HeaderText="IstAusgebucht"/>-->
+                    <syncfusion:GridCheckBoxColumn  MappingName="IstAusgebucht" HeaderText="IstAusgebucht" ValueBinding="{Binding Path=IstAusgebucht,Mode=TwoWay}" AllowEditing="{Binding Path=isEditingAllowed}"/>
+                    
+                    <syncfusion:GridTemplateColumn>
+                        <syncfusion:GridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Ausbuchen" x:Name="Ausbuchen"  
+                                         cal:Message.Attach="[Event Click] =[Action Ausbuche($dataContext)]"/>
+                            </DataTemplate>
+                        </syncfusion:GridTemplateColumn.CellTemplate>
+                    </syncfusion:GridTemplateColumn>
 
                 </syncfusion:SfDataGrid.Columns>
                 <syncfusion:SfDataGrid.GroupSummaryRows>
@@ -98,6 +110,8 @@
             </syncfusion:SfDataGrid>
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <Button x:Name="Save" Content="Speichern" Margin="10,0,10,0"/>
+                <Button x:Name="Ausbuchen" Content="Speichern" Margin="10,0,10,0"/>
+
                 <TextBox Text="{Binding SelectedItem.RechnungsNummer, Mode=OneWay}"/>
             </StackPanel>
 
