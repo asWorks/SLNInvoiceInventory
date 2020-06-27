@@ -92,7 +92,7 @@
                     </syncfusion:GridTableSummaryRow>
                 </syncfusion:SfDataGrid.GroupSummaryRows>
                 <syncfusion:SfDataGrid.GroupColumnDescriptions>
-                    <syncfusion:GroupColumnDescription ColumnName="Monat" Converter="{StaticResource CustomDateTime2MonthConverter}" />
+                    <syncfusion:GroupColumnDescription ColumnName="Datum" Converter="{StaticResource CustomDateTime2MonthConverter}" />
                 </syncfusion:SfDataGrid.GroupColumnDescriptions>
 
             </syncfusion:SfDataGrid>
