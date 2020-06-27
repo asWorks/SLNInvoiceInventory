@@ -59,6 +59,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>G:\Install\Syncfusion\WPF\16.3.0.21\Assemblies\4.6\Syncfusion.SfGrid.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.SfInput.WPF, Version=18.1460.0.42, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.SfShared.Wpf, Version=18.1460.0.42, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Shared.WPF, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>G:\Install\Syncfusion\WPF\16.3.0.21\Assemblies\4.6\Syncfusion.Shared.WPF.dll</HintPath>
@@ -96,6 +98,7 @@
     <Compile Include="Converters\SortDirectionToVisibilityConverter.cs" />
     <Compile Include="Converters\SortDirectionToWidthConverter.cs" />
     <Compile Include="Demo\ExpenseData.cs" />
+    <Compile Include="Events\BaseAddRechnungVMPropertyChangedMessage.cs" />
     <Compile Include="Events\EventMessage.cs" />
     <Compile Include="Interfaces\IAddAusgangsrechnungViewModel.cs" />
     <Compile Include="Interfaces\IAddRechnungViewModel.cs" />
@@ -199,6 +202,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Style\DefaultStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +242,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ClearWindowContent_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\ClearWindowContent_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

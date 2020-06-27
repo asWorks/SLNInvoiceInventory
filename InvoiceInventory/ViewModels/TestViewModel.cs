@@ -36,7 +36,7 @@ namespace InvoiceInventory.ViewModels
 
 
             isEditingAllowed = false;
-            MonthToShow = new ObservableCollection<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            MonthToShow = new ObservableCollection<int> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             SelectedMonthToShow = DateTime.Now.Month;
             UpdateData();
         }
@@ -132,8 +132,22 @@ namespace InvoiceInventory.ViewModels
         #region "Methods"
         private void UpdateData()
         {
-            var data = db.AusgangsRechnungen.Where(n => n.Datum.Month == SelectedMonthToShow);
-            //var data = db.AusgangsRechnungen;
+            //var data = db.AusgangsRechnungen.Where(n => n.Datum.Month == SelectedMonthToShow);
+            ////var data = db.AusgangsRechnungen;
+
+            //Items = new ContextAwareObservableCollection<AusgangsRechnung>(data, db);
+
+            IQueryable<AusgangsRechnung> data;
+
+            if (SelectedMonthToShow == 0)
+            {
+                data = db.AusgangsRechnungen;
+            }
+            else
+            {
+                data = db.AusgangsRechnungen.Where(n => n.Datum.Month == SelectedMonthToShow);
+            }
+
 
             Items = new ContextAwareObservableCollection<AusgangsRechnung>(data, db);
         }

@@ -59,6 +59,7 @@ namespace InvoiceInventory.ViewModels
 
         public void AddEingangsRechnung()
         {
+            //DeactivateItem(_addAusgangsRechnungViewModel,false);
             ActivateItem(_addEingangsRechnungViewModel);
         }
 

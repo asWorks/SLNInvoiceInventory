@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using InvoiceInventory.Events;
 using InvoiceInventory.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,33 @@ using System.Threading.Tasks;
 namespace InvoiceInventory.ViewModels
 {
     [Export(typeof(IBaseAddRechnungViewModel))]
-    public class BaseAddRechnungViewModel:Screen,IBaseAddRechnungViewModel
+    public class BaseAddRechnungViewModel : Screen, IBaseAddRechnungViewModel
     {
-         
-        public BaseAddRechnungViewModel()
+        #region Constructor
+        [ImportingConstructor]
+        public BaseAddRechnungViewModel(IEventAggregator eventAggregator)
         {
-            RechnungsNummer = "zzzTemp";
+            _eventAggregator = eventAggregator;
+            //Datum = DateTime.Now;
+            ClearFields();
         }
+        #endregion
+
+        #region Private Fields
+        IEventAggregator _eventAggregator;
+        internal protected bool isDirty;
+        #endregion
+
+
+
+
+        #region Properties
+
+
 
 
         private int _RechnungsId;
-        public int  RechnungsId
+        public int RechnungsId
         {
             get { return _RechnungsId; }
             set
@@ -29,15 +46,15 @@ namespace InvoiceInventory.ViewModels
                 {
                     _RechnungsId = value;
                     NotifyOfPropertyChange(() => RechnungsId);
-                    //  isDirty = true;
+                    isDirty = true;
                 }
             }
         }
 
 
 
-        private DateTime? _Datum;
-        public DateTime? Datum
+        private DateTime _Datum;
+        public DateTime Datum
         {
             get { return _Datum; }
             set
@@ -46,7 +63,8 @@ namespace InvoiceInventory.ViewModels
                 {
                     _Datum = value;
                     NotifyOfPropertyChange(() => Datum);
-                    //  isDirty = true;
+                    isDirty = true;
+                    MessageIsDirty();
                 }
             }
         }
@@ -62,7 +80,9 @@ namespace InvoiceInventory.ViewModels
                 {
                     _RechnungsNummer = value;
                     NotifyOfPropertyChange(() => RechnungsNummer);
-                    //  isDirty = true;
+                    isDirty = true;
+                    MessageIsDirty();
+
                 }
             }
         }
@@ -78,7 +98,8 @@ namespace InvoiceInventory.ViewModels
                 {
                     _istStorniert = value;
                     NotifyOfPropertyChange(() => istStorniert);
-                    //  isDirty = true;
+                    isDirty = true;
+                    MessageIsDirty();
                 }
             }
         }
@@ -86,6 +107,7 @@ namespace InvoiceInventory.ViewModels
 
 
         private bool _IstAusgebucht;
+
         public bool IstAusgebucht
         {
             get { return _IstAusgebucht; }
@@ -95,14 +117,17 @@ namespace InvoiceInventory.ViewModels
                 {
                     _IstAusgebucht = value;
                     NotifyOfPropertyChange(() => IstAusgebucht);
-                    //  isDirty = true;
+                    isDirty = true;
+                    MessageIsDirty();
                 }
             }
         }
 
-       
+        #endregion
 
-        public void SetFields(int ID,DateTime rDatum,string RNr, bool istStorno,bool istAusbuch)
+
+        #region Methods
+        public void SetFields(int ID, DateTime rDatum, string RNr, bool istStorno, bool istAusbuch)
         {
             RechnungsId = ID;
             Datum = rDatum;
@@ -116,9 +141,20 @@ namespace InvoiceInventory.ViewModels
         {
             RechnungsId = 0;
             Datum = DateTime.Now;
-            RechnungsNummer = "-";
+            RechnungsNummer = "";
             istStorniert = false;
             IstAusgebucht = false;
+            isDirty = false;
         }
+
+        private void MessageIsDirty()
+        {
+            if (isDirty)
+            {
+                _eventAggregator.PublishOnUIThread(new BaseAddRechnungVMPropertyChangedMessage()); 
+            }
+        }
+
+        #endregion
     }
 }

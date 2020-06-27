@@ -13,6 +13,7 @@
                     <local:Bootstrapper x:Key="Bootsrapper"/>
                 </ResourceDictionary>
                 <ResourceDictionary Source="StandardRessources.xaml"/>
+                <ResourceDictionary Source="Style/DefaultStyles.xaml"/>
 
 
             </ResourceDictionary.MergedDictionaries>
