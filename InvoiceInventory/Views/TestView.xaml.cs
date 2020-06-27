@@ -1,4 +1,5 @@
 ﻿using Domain.Models.Rechnungen;
+using InvoiceInventory.ViewModels;
 using Syncfusion.UI.Xaml.Grid;
 using System;
 using System.Windows.Controls;
@@ -10,13 +11,37 @@ namespace InvoiceInventory.Views
     /// </summary>
     public partial class TestView : UserControl
     {
+
+        TestViewModel twm;
         public TestView()
         {
             InitializeComponent();
             SyncfusionGrid.CurrentCellBeginEdit += SyncfusionGrid_CurrentCellBeginEdit;
             SyncfusionGrid.CurrentCellEndEdit += SyncfusionGrid_CurrentCellEndEdit;
-           
+            this.DataContextChanged += TestView_DataContextChanged;
+          
+
         }
+
+        private void TestView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+          if(this.DataContext.GetType() == typeof(TestViewModel) )
+            {
+                
+                twm = (TestViewModel)this.DataContext;
+                twm.RefreshGrid += Twm_RefreshGrid;
+            }
+        }
+
+        private void Twm_RefreshGrid()
+        {
+            if (twm != null)
+            {
+                SyncfusionGrid.View.Refresh();
+            }
+        }
+
+
 
         private void SyncfusionGrid_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
         {
@@ -65,6 +90,9 @@ namespace InvoiceInventory.Views
             //var x = e.RowData as AusgangsrechnungBlank;
         }
 
-      
+        private void Aktualisieren_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            SyncfusionGrid.View.Refresh();
+        }
     }
 }

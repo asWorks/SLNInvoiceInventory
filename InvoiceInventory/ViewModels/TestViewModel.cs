@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows.Input;
 
 namespace InvoiceInventory.ViewModels
 
@@ -15,6 +16,7 @@ namespace InvoiceInventory.ViewModels
     public class TestViewModel : Screen, ITestViewModel
     {
 
+        public event System.Action RefreshGrid;
         #region "Fields"
         private readonly IEventAggregator _events;
         private InvoiceModel db = null;
@@ -23,17 +25,29 @@ namespace InvoiceInventory.ViewModels
         #region "Constructors"
         public TestViewModel()
         {
-
+           
         }
 
-
+        private ICommand rowDataCommand { get; set; }
+        public ICommand RowDataCommand
+        {
+            get
+            {
+                return rowDataCommand;
+            }
+            set
+            {
+                rowDataCommand = value;
+            }
+        }
 
         [ImportingConstructor]
         public TestViewModel(IEventAggregator events)
         {
             _events = events;
             db = new InvoiceModel();
-           
+            rowDataCommand = new Helper.RelayCommand(ChangeCanExecute);
+
 
             isEditingAllowed = false;
             MonthToShow = new ObservableCollection<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
@@ -44,6 +58,24 @@ namespace InvoiceInventory.ViewModels
         #endregion
 
         #region "Properties"
+
+
+
+        private Syncfusion.Data.CollectionViewAdv _sfView;
+        public Syncfusion.Data.CollectionViewAdv sfView
+        {
+            get { return _sfView; }
+            set
+            {
+                if (value != _sfView)
+                {
+                    _sfView = value;
+                    NotifyOfPropertyChange(() => sfView);
+                    //  isDirty = true;
+                }
+            }
+        }
+
         private ContextAwareObservableCollection<AusgangsRechnung> _Items;
         public ContextAwareObservableCollection<AusgangsRechnung> Items
         {
@@ -130,6 +162,25 @@ namespace InvoiceInventory.ViewModels
         #endregion
 
         #region "Methods"
+
+        public void ChangeCanExecute(object obj)
+        {
+           
+            
+            var rowdataContent = (obj as AusgangsRechnung);
+
+            rowdataContent.IstAusgebucht = true;
+            // NotifyOfPropertyChange(() => SelectedItem);
+            RefreshGrid?.Invoke();
+
+
+            //MessageBox.Show("SelectedRow Details:\n" +
+            //    "UserId -" + rowdataContent.UserId +
+            //    "\nName -" + rowdataContent.Name +
+            //    "\nDateofBirth -" + rowdataContent.DateofBirth +
+            //    "\nContactNo -" + rowdataContent.ContactNo +
+            //    "\nSalary -" + rowdataContent.Salary);
+        }
         private void UpdateData()
         {
             IQueryable<AusgangsRechnung> data;
@@ -148,6 +199,8 @@ namespace InvoiceInventory.ViewModels
         }
 
 
+
+
         //public void Ausbuchen(object sender, System.Windows.RoutedEventArgs e)
         //{
 
@@ -156,9 +209,15 @@ namespace InvoiceInventory.ViewModels
 
         #region "CommandMethods"
 
+        public void RefreshView()
+        {
+            //sfView.Refresh();
+        }
+
         public void Save()
         {
             db.SaveChanges();
+
         }
 
 

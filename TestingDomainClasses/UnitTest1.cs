@@ -35,9 +35,9 @@ namespace TestingDomainClasses
 
                     //var query = db.EingangsRechnungen.Where(id => id.RechnungsId == 1).SingleOrDefault();
                     var br = new BuchungsReference(er, DateTime.Now, "Alles gut");
-                    var res = er.Ausbuchen(br);
+                    //var res = er.Ausbuchen(br);
                     var br1 = new BuchungsReference(ar, DateTime.Now, "Hat geklappt");
-                    var arRes = ar.Ausbuchen(br1);
+                    //var arRes = ar.Ausbuchen(br1);
 
                     db.BuchungsReferenzen.Add(br);
                     db.BuchungsReferenzen.Add(br1); 

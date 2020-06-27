@@ -97,6 +97,7 @@
     <Compile Include="Converters\SortDirectionToWidthConverter.cs" />
     <Compile Include="Demo\ExpenseData.cs" />
     <Compile Include="Events\EventMessage.cs" />
+    <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Interfaces\IAddAusgangsrechnungViewModel.cs" />
     <Compile Include="Interfaces\IAddRechnungViewModel.cs" />
     <Compile Include="Interfaces\IInvoiceViewModel.cs" />
@@ -174,7 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BaseClasses\" />
-    <Folder Include="Helper\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
