@@ -6,7 +6,11 @@ namespace Contracts.Domain.BaseClasses
 {
     public class BaseRechnung : IInvoice
     {
-
+        /// <summary>
+        /// Konstruktor für neue Rechnungen - RechnungsID wird automatisch vergeben
+        /// </summary>
+        /// <param name="rechnungsnummer"></param>
+        /// <param name="datum"></param>
         public BaseRechnung(string rechnungsnummer, DateTime datum)
         {
             if (datum == null)
@@ -22,6 +26,21 @@ namespace Contracts.Domain.BaseClasses
             Datum = datum;
             IstStorniert = false;
             IstAusgebucht = false;
+        }
+
+        /// <summary>
+        /// Konstruktor für Rechnungsbearbeitung - RechnungsID muß dann belegt werden
+        /// </summary>
+        /// <param name="rechnungsnummer"></param>
+        /// <param name="datum"></param>
+        /// <param name="rechnungsId"></param>
+        public BaseRechnung(string rechnungsnummer, DateTime datum,int rechnungsId):this(rechnungsnummer,datum)
+        {
+            if (rechnungsId <=0)
+            {
+                throw new ArgumentOutOfRangeException("Rechnungsnummer darf nicht 0 oder negativ sein");
+            }
+            RechnungsId = rechnungsId;
         }
 
         protected BaseRechnung()

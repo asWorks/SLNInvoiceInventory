@@ -16,7 +16,7 @@ namespace InvoiceInventory.ViewModels
     {
 
         #region "Fields"
-        private readonly IEventAggregator _events;
+        private readonly IEventAggregator _eventAggregator;
         private InvoiceModel db = null;
         #endregion
 
@@ -31,12 +31,12 @@ namespace InvoiceInventory.ViewModels
         [ImportingConstructor]
         public TestViewModel(IEventAggregator events)
         {
-            _events = events;
+            _eventAggregator = events;
             db = new InvoiceModel();
 
 
             isEditingAllowed = false;
-            MonthToShow = new ObservableCollection<int> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            MonthToShow = new ObservableCollection<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             SelectedMonthToShow = DateTime.Now.Month;
             UpdateData();
         }
@@ -70,6 +70,10 @@ namespace InvoiceInventory.ViewModels
                 if (value != _SelectedItem)
                 {
                     _SelectedItem = value;
+                    if (_SelectedItem != null)
+                    {
+                        _eventAggregator.PublishOnUIThread(new Events.LoadAusgangsRechnungMessage(_SelectedItem.RechnungsId));
+                    }
                     NotifyOfPropertyChange(() => SelectedItem);
 
                 }

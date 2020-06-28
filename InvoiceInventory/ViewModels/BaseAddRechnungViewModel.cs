@@ -18,14 +18,14 @@ namespace InvoiceInventory.ViewModels
         public BaseAddRechnungViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            //Datum = DateTime.Now;
-            ClearFields();
+           
+           // ClearFields();
         }
         #endregion
 
         #region Private Fields
         IEventAggregator _eventAggregator;
-        internal protected bool isDirty;
+        //internal protected bool isDirty;
         #endregion
 
 
@@ -46,7 +46,7 @@ namespace InvoiceInventory.ViewModels
                 {
                     _RechnungsId = value;
                     NotifyOfPropertyChange(() => RechnungsId);
-                    isDirty = true;
+                    //isDirty = true;
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace InvoiceInventory.ViewModels
                 {
                     _Datum = value;
                     NotifyOfPropertyChange(() => Datum);
-                    isDirty = true;
+                    //isDirty = true;
                     MessageIsDirty();
                 }
             }
@@ -80,7 +80,7 @@ namespace InvoiceInventory.ViewModels
                 {
                     _RechnungsNummer = value;
                     NotifyOfPropertyChange(() => RechnungsNummer);
-                    isDirty = true;
+                    //isDirty = true;
                     MessageIsDirty();
 
                 }
@@ -98,7 +98,7 @@ namespace InvoiceInventory.ViewModels
                 {
                     _istStorniert = value;
                     NotifyOfPropertyChange(() => istStorniert);
-                    isDirty = true;
+                    //isDirty = true;
                     MessageIsDirty();
                 }
             }
@@ -117,7 +117,7 @@ namespace InvoiceInventory.ViewModels
                 {
                     _IstAusgebucht = value;
                     NotifyOfPropertyChange(() => IstAusgebucht);
-                    isDirty = true;
+                    //isDirty = true;
                     MessageIsDirty();
                 }
             }
@@ -144,15 +144,14 @@ namespace InvoiceInventory.ViewModels
             RechnungsNummer = "";
             istStorniert = false;
             IstAusgebucht = false;
-            isDirty = false;
+            //isDirty = false;
         }
 
         private void MessageIsDirty()
         {
-            if (isDirty)
-            {
-                _eventAggregator.PublishOnUIThread(new BaseAddRechnungVMPropertyChangedMessage()); 
-            }
+          
+                _eventAggregator.PublishOnUIThread(new BaseAddRechnungVMPropertyChangedMessage(Enums.enumRechnungsArt.AusgangsRechnung)); 
+            
         }
 
         #endregion

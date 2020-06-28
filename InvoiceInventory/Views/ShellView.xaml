@@ -1,9 +1,10 @@
-﻿<Window x:Class="InvoiceInventory.Views.ShellView"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InvoiceInventory.Views"
+        xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" x:Class="InvoiceInventory.Views.ShellView"
         mc:Ignorable="d"
         Title="ShellView" Height="900" Width="1700">
     <Grid>
@@ -24,6 +25,8 @@
                 <Button Content="Add Ausgangsrechnung" x:Name="AddAusgangsRechnung" Margin="10,3"/>
                 <Button Content="Add Eingangsrechnung" x:Name="AddEingangsRechnung" Margin="10,3"/>
                 <Button Content="TestPeople" x:Name="TestPeople" Margin="10,3"/>
+                <Button Content="TestDatum" x:Name="TestDatum" Margin="10,3"/>
+                <Syncfusion:DateTimeEdit Height="23" TextWrapping="Wrap" Text="DateTimeEdit"/>
 
             </StackPanel>
 
@@ -36,7 +39,7 @@
             </Grid.RowDefinitions>
             <Ellipse Stroke="Black" Fill="#FFA5D8F5"/>
             <ContentControl Content="ContentControl" x:Name="ActiveItem" Grid.Row="1" Margin="10,0,20,0"/>
-          
+
         </Grid>
 
     </Grid>

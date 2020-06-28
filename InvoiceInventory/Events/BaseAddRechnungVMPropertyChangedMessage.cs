@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InvoiceInventory.Enums;
 
 namespace InvoiceInventory.Events
 {
-    public class BaseAddRechnungVMPropertyChangedMessage
+    public partial class BaseAddRechnungVMPropertyChangedMessage
     {
-        bool Message;
-        public BaseAddRechnungVMPropertyChangedMessage()
+
+        public enumRechnungsArt RechnungsArt;
+        public BaseAddRechnungVMPropertyChangedMessage(enumRechnungsArt rechnungsArt)
         {
-           // Message = message;
+           RechnungsArt = rechnungsArt;
         }
     }
 }

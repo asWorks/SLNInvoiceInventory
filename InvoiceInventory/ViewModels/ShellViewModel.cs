@@ -8,16 +8,17 @@ namespace InvoiceInventory.ViewModels
 {
 
     [Export(typeof(IShellViewModel))]
-    public class ShellViewModel : Conductor<object>, IShellViewModel, IHandle<Events.EventMessage>
+    public class ShellViewModel : Conductor<object>, IShellViewModel, IHandle<Events.LoadAusgangsRechnungMessage>
     {
 
 
 
-        private readonly IEventAggregator _events;
+        private readonly IEventAggregator _eventAggregator;
         private ITestViewModel _testViewModel;
         private IAddAusgangsrechnungViewModel _addAusgangsRechnungViewModel;
         private IAddEingangsrechnungViewModel _addEingangsRechnungViewModel;
         private ITestPeopleViewModel _TestPeopleViewModel;
+        private ITestDatumViewModel _testDatumViewModel;
 
         public ShellViewModel()
         {
@@ -33,7 +34,7 @@ namespace InvoiceInventory.ViewModels
             ITestPeopleViewModel TestPeopleVM, 
             IEventAggregator events)
         {
-            _events = events;
+            _eventAggregator = events;
             _testViewModel = testVM;
             _addAusgangsRechnungViewModel = AddAusgangsRechnungVM;
             _addEingangsRechnungViewModel = AddEingangsRechnungVM;
@@ -54,12 +55,15 @@ namespace InvoiceInventory.ViewModels
 
         public void AddAusgangsRechnung()
         {
+            AddAusgangsrechnungViewModel vm = (AddAusgangsrechnungViewModel)_addAusgangsRechnungViewModel;
+            vm.LoadRechnung(0);
             ActivateItem(_addAusgangsRechnungViewModel);
         }
 
         public void AddEingangsRechnung()
         {
-            //DeactivateItem(_addAusgangsRechnungViewModel,false);
+            //AddAusgangsrechnungViewModel vm = (AddAusgangsrechnungViewModel)_addAusgangsRechnungViewModel;
+            //vm.LoadRechnung(0);
             ActivateItem(_addEingangsRechnungViewModel);
         }
 
@@ -68,9 +72,19 @@ namespace InvoiceInventory.ViewModels
             ActivateItem(_TestPeopleViewModel);
         }
 
-        public void Handle(EventMessage message)
+        public void TestDatum()
         {
-            throw new NotImplementedException();
+            _testDatumViewModel = new TestDatumViewModel(_eventAggregator);
+            ActivateItem(_testDatumViewModel);
+        }
+
+      
+        public void Handle(LoadAusgangsRechnungMessage message)
+        {
+            AddAusgangsrechnungViewModel vm = (AddAusgangsrechnungViewModel)_addAusgangsRechnungViewModel;
+            vm.LoadRechnung(message.RechnungsId);
+
+            ActivateItem(_addAusgangsRechnungViewModel);
         }
     }
 

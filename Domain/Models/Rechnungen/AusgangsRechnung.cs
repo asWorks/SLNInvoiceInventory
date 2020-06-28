@@ -5,6 +5,10 @@ namespace Domain.Models.Rechnungen
 {
     public class AusgangsRechnung : BaseRechnung
     {
+        public AusgangsRechnung(DateTime datum, string rechnungsnummer, int rechnungsId) : base(rechnungsnummer, datum,rechnungsId)
+        {
+
+        }
 
         public AusgangsRechnung(DateTime datum, string rechnungsnummer) : base(rechnungsnummer, datum)
         {

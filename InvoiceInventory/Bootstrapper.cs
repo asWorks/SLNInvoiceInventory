@@ -27,6 +27,8 @@
             container.PerRequest<ITestViewModel, TestViewModel>();
             container.PerRequest<IAddAusgangsrechnungViewModel, AddAusgangsrechnungViewModel>();
             container.PerRequest<IAddEingangsrechnungViewModel, AddEingangsrechnungViewModel>();
+            container.PerRequest<ITestDatumViewModel, TestDatumViewModel>();
+
 
             container.PerRequest<IBaseAddRechnungViewModel, BaseAddRechnungViewModel>();
             container.PerRequest<ITestPeopleViewModel, TestPeopleViewModel> ();

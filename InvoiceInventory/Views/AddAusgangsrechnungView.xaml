@@ -32,8 +32,8 @@
             </StackPanel>
             <ListBox x:Name="Items" Height="100"/>
             <StackPanel Orientation="Horizontal">
-                <syncfusion:ButtonAdv x:Name="SaveData"  LargeIcon="Save.png"  Label="Save" Style="{DynamicResource SFButtonStyle}"/>
-                <syncfusion:ButtonAdv x:Name="ClearFields"  LargeIcon="ClearWindowContent_16x.png"  Label="Clear" Style="{DynamicResource SFButtonStyle}"/>
+                <syncfusion:ButtonAdv x:Name="SaveData"  LargeIcon="/InvoiceInventory;component/Images/Save.png"  Label="Save" Style="{DynamicResource SFButtonStyle}"/>
+                <syncfusion:ButtonAdv x:Name="ClearFields"  LargeIcon="/InvoiceInventory;component/Images/ClearWindowContent_16x.png"  Label="Clear" Style="{DynamicResource SFButtonStyle}"/>
             </StackPanel>
         </StackPanel>
 

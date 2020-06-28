@@ -12,12 +12,18 @@ using System.Windows.Documents;
 using System.Windows;
 using InvoiceInventory.Events;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 
 namespace InvoiceInventory.ViewModels
 {
     [Export(typeof(IAddAusgangsrechnungViewModel))]
     public class AddAusgangsrechnungViewModel : Screen, IAddAusgangsrechnungViewModel, IHandle<Events.BaseAddRechnungVMPropertyChangedMessage>
     {
+        public enum RechnungState
+        {
+            RechnungNeu,
+            RechnungBearbeitet
+        };
 
         #region Constructors
         [ImportingConstructor]
@@ -36,6 +42,8 @@ namespace InvoiceInventory.ViewModels
         #region Fields
         private IEventAggregator _eventAggregator;
         private bool runClearData;
+        private RechnungState rechnungState;
+
         #endregion
 
         #region Properties
@@ -166,38 +174,118 @@ namespace InvoiceInventory.ViewModels
 
         public void SaveData()
         {
-            var x = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
-            //if (x.Datum.HasValue)
-            //{
+            var baseAddRechnungVM = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
 
-            var RefRechnung = new AusgangsRechnung(x.Datum, x.RechnungsNummer);
-            var ar = new AusgangsRechnung(x.Datum, x.RechnungsNummer);
-            if (x.istStorniert)
+            AusgangsRechnung agRechnung;
+
+            if (rechnungState == RechnungState.RechnungNeu)
             {
-                ar.Storno(new StornoReference(RefRechnung, DateTime.Now, "Mußte Sein", 23));
+
+                agRechnung = CreateNeueRechnung(baseAddRechnungVM);
             }
-            if (x.IstAusgebucht)
+            else
             {
-                ar.Ausbuchen(new BuchungsReference(RefRechnung, DateTime.Now, "Mußte Sein"));
+                agRechnung = CreateBearbeiteteRechnung(baseAddRechnungVM);
+
             }
 
 
-            ar.Zuzahlung = Zuzahlung;
-            ar.Brutto = Brutto;
-            ar.Netto = Netto;
-            ar.Umsatzsteuer = Umsatzsteuer;
+
+
+            agRechnung.Zuzahlung = Zuzahlung;
+            agRechnung.Brutto = Brutto;
+            agRechnung.Netto = Netto;
+            agRechnung.Umsatzsteuer = Umsatzsteuer;
 
             using (var db = new InvoiceModel())
             {
-                db.AusgangsRechnungen.Add(ar);
+                if (rechnungState == RechnungState.RechnungBearbeitet)
+                {
+
+                    db.AusgangsRechnungen.Attach(agRechnung);
+                    db.Entry(agRechnung).State = EntityState.Modified;
+                }
+                else
+                {
+                    db.AusgangsRechnungen.Add(agRechnung);
+                }
                 db.SaveChanges();
             }
-            x.isDirty = false;
+           // baseAddRechnungVM.isDirty = false;
             isDirty = false;
 
-            //}
+
 
         }
+
+        private static AusgangsRechnung CreateBearbeiteteRechnung(BaseAddRechnungViewModel brAddVM)
+        {
+            return new AusgangsRechnung(brAddVM.Datum, brAddVM.RechnungsNummer, brAddVM.RechnungsId);
+        }
+
+        private AusgangsRechnung CreateNeueRechnung(BaseAddRechnungViewModel brAddVM)
+        {
+            var RefRechnung = new AusgangsRechnung(brAddVM.Datum, brAddVM.RechnungsNummer);
+
+
+
+
+            var agRechnung = new AusgangsRechnung(brAddVM.Datum, brAddVM.RechnungsNummer);
+            if (brAddVM.istStorniert)
+            {
+                agRechnung.Storno(new StornoReference(RefRechnung, DateTime.Now, "Mußte Sein", 23));
+            }
+            if (brAddVM.IstAusgebucht)
+            {
+                agRechnung.Ausbuchen(new BuchungsReference(RefRechnung, DateTime.Now, "Mußte Sein"));
+            }
+
+
+
+            return agRechnung;
+        }
+
+
+        public void LoadRechnung(int rID)
+        {
+            if (rID == 0)
+            {
+                rechnungState = RechnungState.RechnungNeu;
+                ClearFields();
+
+            }
+            else
+            {
+                rechnungState = RechnungState.RechnungBearbeitet;
+
+                using (var db = new InvoiceModel())
+                {
+                    var rechnung = db.AusgangsRechnungen.Where(id => id.RechnungsId == rID).FirstOrDefault();
+                    if (rechnung != null)
+                    {
+                        var baseAddRechnungVm = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+                        baseAddRechnungVm.SetFields(rechnung.RechnungsId, rechnung.Datum, rechnung.RechnungsNummer, 
+                                                                           rechnung.IstStorniert, rechnung.IstAusgebucht);
+
+                        //baseAddRechnungVm.RechnungsId = rechnung.RechnungsId;
+                        //baseAddRechnungVm.RechnungsNummer = rechnung.RechnungsNummer;
+                        //baseAddRechnungVm.Datum = rechnung.Datum;
+                        //baseAddRechnungVm.istStorniert = rechnung.IstStorniert;
+                        //baseAddRechnungVm.IstAusgebucht = rechnung.IstAusgebucht;
+                        Brutto = rechnung.Brutto;
+                        Netto = rechnung.Netto;
+                        Umsatzsteuer = rechnung.Umsatzsteuer;
+                        Zuzahlung = rechnung.Zuzahlung;
+
+
+                        isDirty = false;
+
+                    }
+
+                }
+            }
+        }
+
 
         void checkValues()
         {
@@ -287,9 +375,14 @@ namespace InvoiceInventory.ViewModels
             }
         }
 
+
         public void Handle(BaseAddRechnungVMPropertyChangedMessage message)
         {
-            isDirty = true;
+            if (message.RechnungsArt == Enums.enumRechnungsArt.AusgangsRechnung)
+            {
+                isDirty = true;
+            }
+
         }
     }
 }
