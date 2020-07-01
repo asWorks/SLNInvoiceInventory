@@ -211,7 +211,7 @@ namespace InvoiceInventory.ViewModels
                 }
                 db.SaveChanges();
             }
-           // baseAddRechnungVM.isDirty = false;
+            // baseAddRechnungVM.isDirty = false;
             isDirty = false;
 
 
@@ -248,44 +248,42 @@ namespace InvoiceInventory.ViewModels
 
         public void LoadRechnung(int rID)
         {
-            if (rID == 0)
-            {
-                rechnungState = RechnungState.RechnungNeu;
-                ClearFields();
 
-            }
-            else
-            {
-                rechnungState = RechnungState.RechnungBearbeitet;
+            rechnungState = RechnungState.RechnungBearbeitet;
 
-                using (var db = new InvoiceModel())
+            using (var db = new InvoiceModel())
+            {
+                var rechnung = db.AusgangsRechnungen.Where(id => id.RechnungsId == rID).FirstOrDefault();
+                if (rechnung != null)
                 {
-                    var rechnung = db.AusgangsRechnungen.Where(id => id.RechnungsId == rID).FirstOrDefault();
-                    if (rechnung != null)
-                    {
-                        var baseAddRechnungVm = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
-                        baseAddRechnungVm.SetFields(rechnung.RechnungsId, rechnung.Datum, rechnung.RechnungsNummer, 
-                                                                           rechnung.IstStorniert, rechnung.IstAusgebucht);
+                    var baseAddRechnungVm = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+                    baseAddRechnungVm.SetFields(rechnung.RechnungsId, rechnung.Datum, rechnung.RechnungsNummer,
+                                                                       rechnung.IstStorniert, rechnung.IstAusgebucht);
 
-                        //baseAddRechnungVm.RechnungsId = rechnung.RechnungsId;
-                        //baseAddRechnungVm.RechnungsNummer = rechnung.RechnungsNummer;
-                        //baseAddRechnungVm.Datum = rechnung.Datum;
-                        //baseAddRechnungVm.istStorniert = rechnung.IstStorniert;
-                        //baseAddRechnungVm.IstAusgebucht = rechnung.IstAusgebucht;
-                        Brutto = rechnung.Brutto;
-                        Netto = rechnung.Netto;
-                        Umsatzsteuer = rechnung.Umsatzsteuer;
-                        Zuzahlung = rechnung.Zuzahlung;
+                    //baseAddRechnungVm.RechnungsId = rechnung.RechnungsId;
+                    //baseAddRechnungVm.RechnungsNummer = rechnung.RechnungsNummer;
+                    //baseAddRechnungVm.Datum = rechnung.Datum;
+                    //baseAddRechnungVm.istStorniert = rechnung.IstStorniert;
+                    //baseAddRechnungVm.IstAusgebucht = rechnung.IstAusgebucht;
+                    Brutto = rechnung.Brutto;
+                    Netto = rechnung.Netto;
+                    Umsatzsteuer = rechnung.Umsatzsteuer;
+                    Zuzahlung = rechnung.Zuzahlung;
 
 
-                        isDirty = false;
-
-                    }
+                    isDirty = false;
 
                 }
+
             }
+
         }
 
+        public void AddNewRechnung()
+        {
+            rechnungState = RechnungState.RechnungNeu;
+            ClearFields();
+        }
 
         void checkValues()
         {

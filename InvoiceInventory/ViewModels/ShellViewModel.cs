@@ -56,7 +56,7 @@ namespace InvoiceInventory.ViewModels
         public void AddAusgangsRechnung()
         {
             AddAusgangsrechnungViewModel vm = (AddAusgangsrechnungViewModel)_addAusgangsRechnungViewModel;
-            vm.LoadRechnung(0);
+            vm.AddNewRechnung();
             ActivateItem(_addAusgangsRechnungViewModel);
         }
 

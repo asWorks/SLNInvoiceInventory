@@ -8,7 +8,7 @@
              xmlns:vm="clr-namespace:InvoiceInventory.ViewModels"
              xmlns:conv="clr-namespace:InvoiceInventory.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" d:DesignWidth="1000"
              >
     <!--<UserControl.DataContext>
         <vm:TestViewModel/>
@@ -25,8 +25,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <CheckBox x:Name="isEditingAllowed"/>
@@ -35,7 +35,7 @@
 
             <!--CellStyle="{StaticResource CellStyle}"-->
             <syncfusion:SfDataGrid Grid.Row="1" x:Name="SyncfusionGrid"
-                                   Margin="100,20,500,10"
+                                   Margin="20,20,10,10"
                                        NavigationMode="Cell"
                                        AutoGenerateColumns="False"
                                        BorderThickness="0"
