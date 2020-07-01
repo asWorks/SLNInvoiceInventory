@@ -17,7 +17,7 @@ using System.Data.Entity;
 namespace InvoiceInventory.ViewModels
 {
     [Export(typeof(IAddAusgangsrechnungViewModel))]
-    public class AddAusgangsrechnungViewModel : Screen, IAddAusgangsrechnungViewModel, IHandle<Events.BaseAddRechnungVMPropertyChangedMessage>
+    public class AddAusgangsrechnungViewModel : BaseAddRechnungViewModel, IAddAusgangsrechnungViewModel, IHandle<Events.BaseAddRechnungVMPropertyChangedMessage>
     {
         public enum RechnungState
         {
@@ -27,11 +27,11 @@ namespace InvoiceInventory.ViewModels
 
         #region Constructors
         [ImportingConstructor]
-        public AddAusgangsrechnungViewModel(IEventAggregator eventAggregator, IBaseAddRechnungViewModel _BaseRechnungVM)
+        public AddAusgangsrechnungViewModel(IEventAggregator eventAggregator):base(eventAggregator)
         {
             _eventAggregator = eventAggregator;
             eventAggregator.Subscribe(this);
-            _BaseAddRechnungViewVM = _BaseRechnungVM;
+           // _BaseAddRechnungViewVM = _BaseRechnungVM;
             Items = new ObservableCollection<string>();
 
         }
@@ -48,20 +48,20 @@ namespace InvoiceInventory.ViewModels
 
         #region Properties
 
-        private IBaseAddRechnungViewModel _BaseAddRechnungViewVM;
-        public IBaseAddRechnungViewModel BaseAddRechnungViewVM
-        {
-            get { return _BaseAddRechnungViewVM; }
-            set
-            {
-                if (value != _BaseAddRechnungViewVM)
-                {
-                    _BaseAddRechnungViewVM = value;
-                    NotifyOfPropertyChange(() => BaseAddRechnungViewVM);
-                    //  isDirty = true;
-                }
-            }
-        }
+        //private IBaseAddRechnungViewModel _BaseAddRechnungViewVM;
+        //public IBaseAddRechnungViewModel BaseAddRechnungViewVM
+        //{
+        //    get { return _BaseAddRechnungViewVM; }
+        //    set
+        //    {
+        //        if (value != _BaseAddRechnungViewVM)
+        //        {
+        //            _BaseAddRechnungViewVM = value;
+        //            NotifyOfPropertyChange(() => BaseAddRechnungViewVM);
+        //            //  isDirty = true;
+        //        }
+        //    }
+        //}
 
 
 
@@ -174,28 +174,28 @@ namespace InvoiceInventory.ViewModels
 
         public void SaveData()
         {
-            var baseAddRechnungVM = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+           // var baseAddRechnungVM = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
 
             AusgangsRechnung agRechnung;
 
             if (rechnungState == RechnungState.RechnungNeu)
             {
 
-                agRechnung = CreateNeueRechnung(baseAddRechnungVM);
+                agRechnung = CreateNeueRechnung();
             }
             else
             {
-                agRechnung = CreateBearbeiteteRechnung(baseAddRechnungVM);
+                agRechnung = CreateBearbeiteteRechnung();
 
             }
 
 
 
 
-            agRechnung.Zuzahlung = Zuzahlung;
-            agRechnung.Brutto = Brutto;
-            agRechnung.Netto = Netto;
-            agRechnung.Umsatzsteuer = Umsatzsteuer;
+           // agRechnung.Zuzahlung = Zuzahlung;
+            //agRechnung.Brutto = Brutto;
+            //agRechnung.Netto = Netto;
+            //agRechnung.Umsatzsteuer = Umsatzsteuer;
 
             using (var db = new InvoiceModel())
             {
@@ -218,24 +218,24 @@ namespace InvoiceInventory.ViewModels
 
         }
 
-        private static AusgangsRechnung CreateBearbeiteteRechnung(BaseAddRechnungViewModel brAddVM)
+        private  AusgangsRechnung CreateBearbeiteteRechnung()
         {
-            return new AusgangsRechnung(brAddVM.Datum, brAddVM.RechnungsNummer, brAddVM.RechnungsId);
+            return new AusgangsRechnung(Datum, RechnungsNummer, RechnungsId);
         }
 
-        private AusgangsRechnung CreateNeueRechnung(BaseAddRechnungViewModel brAddVM)
+        private AusgangsRechnung CreateNeueRechnung()
         {
-            var RefRechnung = new AusgangsRechnung(brAddVM.Datum, brAddVM.RechnungsNummer);
+            var RefRechnung = new AusgangsRechnung(Datum, RechnungsNummer);
+
+           
 
 
-
-
-            var agRechnung = new AusgangsRechnung(brAddVM.Datum, brAddVM.RechnungsNummer);
-            if (brAddVM.istStorniert)
+            var agRechnung = new AusgangsRechnung(Datum, RechnungsNummer);
+            if (istStorniert)
             {
                 agRechnung.Storno(new StornoReference(RefRechnung, DateTime.Now, "Mußte Sein", 23));
             }
-            if (brAddVM.IstAusgebucht)
+            if (IstAusgebucht)
             {
                 agRechnung.Ausbuchen(new BuchungsReference(RefRechnung, DateTime.Now, "Mußte Sein"));
             }
@@ -256,9 +256,9 @@ namespace InvoiceInventory.ViewModels
                 var rechnung = db.AusgangsRechnungen.Where(id => id.RechnungsId == rID).FirstOrDefault();
                 if (rechnung != null)
                 {
-                    var baseAddRechnungVm = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
-                    baseAddRechnungVm.SetFields(rechnung.RechnungsId, rechnung.Datum, rechnung.RechnungsNummer,
-                                                                       rechnung.IstStorniert, rechnung.IstAusgebucht);
+                   // var baseAddRechnungVm = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+                   // baseAddRechnungVm.SetFields(rechnung.RechnungsId, rechnung.Datum, rechnung.RechnungsNummer,
+                                                                      // rechnung.IstStorniert, rechnung.IstAusgebucht);
 
                     //baseAddRechnungVm.RechnungsId = rechnung.RechnungsId;
                     //baseAddRechnungVm.RechnungsNummer = rechnung.RechnungsNummer;
@@ -310,13 +310,13 @@ namespace InvoiceInventory.ViewModels
         public void ClearFields()
         {
             runClearData = true;
-            var x = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
-            NotifyOfPropertyChange(() => BaseAddRechnungViewVM);
+           // var x = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+           // NotifyOfPropertyChange(() => BaseAddRechnungViewVM);
             Zuzahlung = 0;
             Brutto = 0;
             Netto = 0;
             Umsatzsteuer = 0;
-            x.ClearFields();
+           // x.ClearFields();
             isDirty = false;
 
             runClearData = false;

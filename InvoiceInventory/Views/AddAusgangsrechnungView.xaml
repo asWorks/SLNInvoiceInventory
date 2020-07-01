@@ -9,7 +9,24 @@
     <Grid>
 
         <StackPanel Margin="20,0,0,0" Width="400">
-            <ContentControl x:Name="BaseAddRechnungViewVM" MinHeight="150"/>
+            <!--<ContentControl x:Name="BaseAddRechnungViewVM" MinHeight="150"/>-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="RechnungsID"  Style="{StaticResource TextBlockStyle}"  />
+                <syncfusion:DateTimeEdit x:Name="Datum" DateTime="{Binding Path=Datum,Mode=TwoWay}" Style="{DynamicResource SFDateTimeEditStyle}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="RechnungsNr" Style="{StaticResource TextBlockStyle}"  />
+                <TextBox x:Name="RechnungsNummer" Style="{StaticResource TextBoxStyle}"  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Ist Storniert" Style="{StaticResource TextBlockStyle}"  />
+                <CheckBox x:Name="istStorniert" Style="{StaticResource CheckBoxStyle}"  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Ist Ausgebucht" Style="{StaticResource TextBlockStyle}"  />
+                <CheckBox x:Name="IstAusgebucht" Style="{StaticResource CheckBoxStyle}"  />
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Zuzahlung" Style="{DynamicResource TextBlockStyle}"/>
                 <TextBox x:Name="Zuzahlung" Text="{Binding Path=Zuzahlung,UpdateSourceTrigger=LostFocus,Mode=TwoWay,StringFormat='{}{0:c}'}" Style="{DynamicResource TextBoxStyle}"/>
