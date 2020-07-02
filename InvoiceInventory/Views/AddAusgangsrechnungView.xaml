@@ -8,39 +8,43 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
-        <StackPanel Margin="20,0,0,0" Width="400">
+        <StackPanel Margin="20,0,0,0" Width="400" HorizontalAlignment="Center">
             <!--<ContentControl x:Name="BaseAddRechnungViewVM" MinHeight="150"/>-->
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="RechnungsID"  Style="{StaticResource TextBlockStyle}"  />
+                <TextBlock Text="RechnungsId: " Style="{StaticResource TextBlockStyle}"  />
+                <TextBox x:Name="RechnungsId" Style="{StaticResource TextBoxStyle}"  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Datum: "  Style="{StaticResource TextBlockStyle}"  />
                 <syncfusion:DateTimeEdit x:Name="Datum" DateTime="{Binding Path=Datum,Mode=TwoWay}" Style="{DynamicResource SFDateTimeEditStyle}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="RechnungsNr" Style="{StaticResource TextBlockStyle}"  />
+                <TextBlock Text="RechnungsNr: " Style="{StaticResource TextBlockStyle}"  />
                 <TextBox x:Name="RechnungsNummer" Style="{StaticResource TextBoxStyle}"  />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Ist Storniert" Style="{StaticResource TextBlockStyle}"  />
-                <CheckBox x:Name="istStorniert" Style="{StaticResource CheckBoxStyle}"  />
+                <TextBlock Text="Ist Storniert: " Style="{StaticResource TextBlockStyle}"  />
+                <CheckBox x:Name="IstStorniert" Style="{StaticResource CheckBoxStyle}"  />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Ist Ausgebucht" Style="{StaticResource TextBlockStyle}"  />
+                <TextBlock Text="Ist Ausgebucht: " Style="{StaticResource TextBlockStyle}"  />
                 <CheckBox x:Name="IstAusgebucht" Style="{StaticResource CheckBoxStyle}"  />
             </StackPanel>
             
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Zuzahlung" Style="{DynamicResource TextBlockStyle}"/>
+                <TextBlock Text="Zuzahlung: " Style="{DynamicResource TextBlockStyle}"/>
                 <TextBox x:Name="Zuzahlung" Text="{Binding Path=Zuzahlung,UpdateSourceTrigger=LostFocus,Mode=TwoWay,StringFormat='{}{0:c}'}" Style="{DynamicResource TextBoxStyle}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Umsatzsteuer" Style="{DynamicResource TextBlockStyle}"/>
+                <TextBlock Text="Umsatzsteuer: " Style="{DynamicResource TextBlockStyle}"/>
                 <TextBox x:Name="Umsatzsteuer" Text="{Binding Path=Umsatzsteuer,UpdateSourceTrigger=LostFocus,Mode=TwoWay,StringFormat='{}{0:c}'}" Style="{DynamicResource TextBoxStyle}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Brutto" Style="{DynamicResource TextBlockStyle}"/>
+                <TextBlock Text="Brutto: " Style="{DynamicResource TextBlockStyle}"/>
                 <TextBox x:Name="Brutto" Text="{Binding Path=Brutto,UpdateSourceTrigger=LostFocus,Mode=TwoWay,StringFormat='{}{0:c}'}" Style="{DynamicResource TextBoxStyle}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Netto" Style="{DynamicResource TextBlockStyle}"/>
+                <TextBlock Text="Netto: " Style="{DynamicResource TextBlockStyle}"/>
                 <TextBox x:Name="Netto" Text="{Binding Path=Netto,UpdateSourceTrigger=LostFocus,Mode=TwoWay,StringFormat='{}{0:c}'}" Style="{DynamicResource TextBoxStyle}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">

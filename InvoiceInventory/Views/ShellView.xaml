@@ -4,29 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InvoiceInventory.Views"
-        xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" x:Class="InvoiceInventory.Views.ShellView"
+        xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" x:Class="InvoiceInventory.Views.ShellView"
         mc:Ignorable="d"
-        Title="ShellView" Height="900" Width="1700">
-    <Grid>
+        Title="ShellView" Height="900" Width="Auto">
+    <Grid Width="Auto">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80*"/>
-            <ColumnDefinition Width="850*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="121*"/>
-                <RowDefinition Height="298*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1">
-                <Button Content="Test" x:Name="Test" Margin="10,10" Style="{DynamicResource ButtonStyle1}"/>
-                <Button Content="Add Ausgangsrechnung" x:Name="AddAusgangsRechnung" Margin="10,3"/>
-                <Button Content="Add Eingangsrechnung" x:Name="AddEingangsRechnung" Margin="10,3"/>
+                <Syncfusion:ButtonAdv x:Name="Test" LargeIcon="/InvoiceInventory;component/Images/Save.png"  Label="Rechnungen" Style="{DynamicResource SFButtonStyle}"/>
+                <Syncfusion:ButtonAdv x:Name="AddAusgangsRechnung" LargeIcon="/InvoiceInventory;component/Images/Save.png"  Label="Ausgangsrechnung" Style="{DynamicResource SFButtonStyle}"/>
+                <Syncfusion:ButtonAdv x:Name="AddEingangsRechnung" LargeIcon="/InvoiceInventory;component/Images/Save.png"  Label="Eingangsrechnung" Style="{DynamicResource SFButtonStyle}"/>
+
+
                 <Button Content="TestPeople" x:Name="TestPeople" Margin="10,3"/>
                 <Button Content="TestDatum" x:Name="TestDatum" Margin="10,3"/>
-                <Syncfusion:DateTimeEdit Height="23" TextWrapping="Wrap" Text="DateTimeEdit"/>
+               
 
             </StackPanel>
 
@@ -41,6 +43,8 @@
             <ContentControl Content="ContentControl" x:Name="ActiveItem" Grid.Row="1" Margin="10,0,20,0"/>
 
         </Grid>
+
+        
 
     </Grid>
 </Window>

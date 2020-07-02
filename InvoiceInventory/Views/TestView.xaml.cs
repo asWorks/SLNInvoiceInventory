@@ -63,5 +63,12 @@ namespace InvoiceInventory.Views
         {
             var x = e.RowData as AusgangsrechnungBlank;
         }
+
+        private void Refresh_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            SyncfusionGrid.BeginInit();
+            SyncfusionGrid.EndInit();
+            SyncfusionGrid.View.Refresh();
+        }
     }
 }

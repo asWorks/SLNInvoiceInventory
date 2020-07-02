@@ -1,18 +1,20 @@
 ﻿using Caliburn.Micro;
 using DalMySQL;
 using Domain.Models.Rechnungen;
+using InvoiceInventory.Events;
 using InvoiceInventory.Interfaces;
 using InvoiceInventory.ObjectCollections;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows;
 
 namespace InvoiceInventory.ViewModels
 
 {
     [Export(typeof(ITestViewModel))]
-    public class TestViewModel : Screen, ITestViewModel
+    public class TestViewModel : Screen, ITestViewModel, IHandle<Events.UpdateAusgangsRechnungenMessage>
     {
 
         #region "Fields"
@@ -34,7 +36,7 @@ namespace InvoiceInventory.ViewModels
             _eventAggregator = events;
             db = new InvoiceModel();
 
-
+            _eventAggregator.Subscribe(this);
             isEditingAllowed = false;
             MonthToShow = new ObservableCollection<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             SelectedMonthToShow = DateTime.Now.Month;
@@ -44,8 +46,25 @@ namespace InvoiceInventory.ViewModels
         #endregion
 
         #region "Properties"
-        private ContextAwareObservableCollection<AusgangsRechnung> _Items;
-        public ContextAwareObservableCollection<AusgangsRechnung> Items
+        //private ContextAwareObservableCollection<AusgangsRechnung> _Items;
+        //public ContextAwareObservableCollection<AusgangsRechnung> Items
+        //{
+        //    get { return _Items; }
+        //    set
+        //    {
+        //        if (value != _Items)
+        //        {
+        //            _Items = value;
+        //            NotifyOfPropertyChange(() => Items);
+        //            //  isDirty = true;
+        //        }
+        //    }
+        //}
+
+
+
+        private ObservableCollection<AusgangsRechnung> _Items;
+        public ObservableCollection<AusgangsRechnung> Items
         {
             get { return _Items; }
             set
@@ -58,7 +77,6 @@ namespace InvoiceInventory.ViewModels
                 }
             }
         }
-
 
 
         private AusgangsRechnung _SelectedItem;
@@ -136,11 +154,7 @@ namespace InvoiceInventory.ViewModels
         #region "Methods"
         private void UpdateData()
         {
-            //var data = db.AusgangsRechnungen.Where(n => n.Datum.Month == SelectedMonthToShow);
-            ////var data = db.AusgangsRechnungen;
-
-            //Items = new ContextAwareObservableCollection<AusgangsRechnung>(data, db);
-
+            RefreshDataContext();
             IQueryable<AusgangsRechnung> data;
 
             if (SelectedMonthToShow == 0)
@@ -153,7 +167,16 @@ namespace InvoiceInventory.ViewModels
             }
 
 
-            Items = new ContextAwareObservableCollection<AusgangsRechnung>(data, db);
+            // Items = new ContextAwareObservableCollection<AusgangsRechnung>(data, db);
+            Items = new ObservableCollection<AusgangsRechnung>(data);
+           
+
+        }
+
+        private void RefreshDataContext()
+        {
+            db.SaveChanges();
+            db = new InvoiceModel();
         }
         #endregion
 
@@ -162,6 +185,11 @@ namespace InvoiceInventory.ViewModels
         public void Save()
         {
             db.SaveChanges();
+        }
+
+        public void Handle(UpdateAusgangsRechnungenMessage message)
+        {
+            UpdateData();
         }
 
 

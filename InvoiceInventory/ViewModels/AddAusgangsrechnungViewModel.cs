@@ -27,11 +27,11 @@ namespace InvoiceInventory.ViewModels
 
         #region Constructors
         [ImportingConstructor]
-        public AddAusgangsrechnungViewModel(IEventAggregator eventAggregator):base(eventAggregator)
+        public AddAusgangsrechnungViewModel(IEventAggregator eventAggregator) : base(eventAggregator)
         {
             _eventAggregator = eventAggregator;
             eventAggregator.Subscribe(this);
-           // _BaseAddRechnungViewVM = _BaseRechnungVM;
+            // _BaseAddRechnungViewVM = _BaseRechnungVM;
             Items = new ObservableCollection<string>();
 
         }
@@ -172,9 +172,11 @@ namespace InvoiceInventory.ViewModels
 
         #region Methods
 
+        
+
         public void SaveData()
         {
-           // var baseAddRechnungVM = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+           
 
             AusgangsRechnung agRechnung;
 
@@ -190,12 +192,17 @@ namespace InvoiceInventory.ViewModels
             }
 
 
+            if (IstStorniert)
+            {
+                agRechnung.Storno(new StornoReference(agRechnung,DateTime.Now, "Irgendwas", 5));
+            }
 
-
-           // agRechnung.Zuzahlung = Zuzahlung;
-            //agRechnung.Brutto = Brutto;
-            //agRechnung.Netto = Netto;
-            //agRechnung.Umsatzsteuer = Umsatzsteuer;
+           // agRechnung.IstStorniert = IstStorniert;
+            agRechnung.IstAusgebucht = IstAusgebucht;
+            agRechnung.Zuzahlung = Zuzahlung;
+            agRechnung.Brutto = Brutto;
+            agRechnung.Netto = Netto;
+            agRechnung.Umsatzsteuer = Umsatzsteuer;
 
             using (var db = new InvoiceModel())
             {
@@ -211,14 +218,15 @@ namespace InvoiceInventory.ViewModels
                 }
                 db.SaveChanges();
             }
-            // baseAddRechnungVM.isDirty = false;
+           
             isDirty = false;
+            _eventAggregator.PublishOnUIThread(new UpdateAusgangsRechnungenMessage());
 
 
 
         }
 
-        private  AusgangsRechnung CreateBearbeiteteRechnung()
+        private AusgangsRechnung CreateBearbeiteteRechnung()
         {
             return new AusgangsRechnung(Datum, RechnungsNummer, RechnungsId);
         }
@@ -227,11 +235,11 @@ namespace InvoiceInventory.ViewModels
         {
             var RefRechnung = new AusgangsRechnung(Datum, RechnungsNummer);
 
-           
+
 
 
             var agRechnung = new AusgangsRechnung(Datum, RechnungsNummer);
-            if (istStorniert)
+            if (IstStorniert)
             {
                 agRechnung.Storno(new StornoReference(RefRechnung, DateTime.Now, "Mußte Sein", 23));
             }
@@ -256,15 +264,13 @@ namespace InvoiceInventory.ViewModels
                 var rechnung = db.AusgangsRechnungen.Where(id => id.RechnungsId == rID).FirstOrDefault();
                 if (rechnung != null)
                 {
-                   // var baseAddRechnungVm = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
-                   // baseAddRechnungVm.SetFields(rechnung.RechnungsId, rechnung.Datum, rechnung.RechnungsNummer,
-                                                                      // rechnung.IstStorniert, rechnung.IstAusgebucht);
+                  
 
-                    //baseAddRechnungVm.RechnungsId = rechnung.RechnungsId;
-                    //baseAddRechnungVm.RechnungsNummer = rechnung.RechnungsNummer;
-                    //baseAddRechnungVm.Datum = rechnung.Datum;
-                    //baseAddRechnungVm.istStorniert = rechnung.IstStorniert;
-                    //baseAddRechnungVm.IstAusgebucht = rechnung.IstAusgebucht;
+                    RechnungsId = rechnung.RechnungsId;
+                    RechnungsNummer = rechnung.RechnungsNummer;
+                    Datum = rechnung.Datum;
+                    IstStorniert = rechnung.IstStorniert;
+                    IstAusgebucht = rechnung.IstAusgebucht;
                     Brutto = rechnung.Brutto;
                     Netto = rechnung.Netto;
                     Umsatzsteuer = rechnung.Umsatzsteuer;
@@ -282,6 +288,14 @@ namespace InvoiceInventory.ViewModels
         public void AddNewRechnung()
         {
             rechnungState = RechnungState.RechnungNeu;
+            Datum = DateTime.Now;
+            IstStorniert = false;
+            IstAusgebucht = false;
+            Brutto = 0; Netto = 0;
+            Umsatzsteuer = 0;
+            Zuzahlung = 0;
+
+
             ClearFields();
         }
 
@@ -310,13 +324,13 @@ namespace InvoiceInventory.ViewModels
         public void ClearFields()
         {
             runClearData = true;
-           // var x = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
-           // NotifyOfPropertyChange(() => BaseAddRechnungViewVM);
+            // var x = (BaseAddRechnungViewVM as BaseAddRechnungViewModel);
+            // NotifyOfPropertyChange(() => BaseAddRechnungViewVM);
             Zuzahlung = 0;
             Brutto = 0;
             Netto = 0;
             Umsatzsteuer = 0;
-           // x.ClearFields();
+            // x.ClearFields();
             isDirty = false;
 
             runClearData = false;

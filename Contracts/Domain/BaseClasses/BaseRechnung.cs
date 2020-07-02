@@ -89,7 +89,7 @@ namespace Contracts.Domain.BaseClasses
 
         
         public bool IstStorniert { get; private set; }
-        public bool IstAusgebucht { get; private set; }
+        public bool IstAusgebucht { get; set; }
 
         public virtual bool Storno(IStornoReference stornoReference)
         {

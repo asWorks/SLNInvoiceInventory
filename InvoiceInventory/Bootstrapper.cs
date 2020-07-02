@@ -7,6 +7,7 @@
     using InvoiceInventory;
     using Caliburn.Micro;
     using InvoiceInventory.Interfaces;
+    using System.Data.Entity;
 
     public class Bootstrapper : BootstrapperBase
     {
@@ -28,6 +29,7 @@
             container.PerRequest<IAddAusgangsrechnungViewModel, AddAusgangsrechnungViewModel>();
             container.PerRequest<IAddEingangsrechnungViewModel, AddEingangsrechnungViewModel>();
             container.PerRequest<ITestDatumViewModel, TestDatumViewModel>();
+
 
 
             container.PerRequest<IBaseAddRechnungViewModel, BaseAddRechnungViewModel>();

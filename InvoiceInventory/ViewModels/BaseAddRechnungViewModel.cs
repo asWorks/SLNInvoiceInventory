@@ -89,7 +89,7 @@ namespace InvoiceInventory.ViewModels
 
 
         private bool _istStorniert;
-        public bool istStorniert
+        public bool IstStorniert
         {
             get { return _istStorniert; }
             set
@@ -97,7 +97,7 @@ namespace InvoiceInventory.ViewModels
                 if (value != _istStorniert)
                 {
                     _istStorniert = value;
-                    NotifyOfPropertyChange(() => istStorniert);
+                    NotifyOfPropertyChange(() => IstStorniert);
                     //isDirty = true;
                     MessageIsDirty();
                 }
@@ -132,7 +132,7 @@ namespace InvoiceInventory.ViewModels
             RechnungsId = ID;
             Datum = rDatum;
             RechnungsNummer = RNr;
-            istStorniert = istStorno;
+            IstStorniert = istStorno;
             IstAusgebucht = istAusbuch;
 
         }
@@ -142,7 +142,7 @@ namespace InvoiceInventory.ViewModels
             RechnungsId = 0;
             Datum = DateTime.Now;
             RechnungsNummer = "";
-            istStorniert = false;
+            IstStorniert = false;
             IstAusgebucht = false;
             //isDirty = false;
         }

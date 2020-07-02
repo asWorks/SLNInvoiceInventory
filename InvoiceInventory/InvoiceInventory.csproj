@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.WPF.4, Version=4.0.20143.434, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce, processorArchitecture=MSIL" />
     <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
@@ -70,7 +71,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -102,8 +105,10 @@
     <Compile Include="Enums\enumRechnungsArt.cs" />
     <Compile Include="Events\EventMessage.cs" />
     <Compile Include="Events\LoadAusgangsRechnungMessage.cs" />
+    <Compile Include="Events\UpdateAusgangsRechnungenMessage.cs" />
     <Compile Include="Interfaces\IAddAusgangsrechnungViewModel.cs" />
     <Compile Include="Interfaces\IAddRechnungViewModel.cs" />
+    <Compile Include="Interfaces\IDBContext.cs" />
     <Compile Include="Interfaces\IInvoiceViewModel.cs" />
     <Compile Include="Interfaces\ITestViewModel.cs" />
     <Compile Include="Interfaces\IShellViewModel.cs" />
@@ -165,6 +170,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

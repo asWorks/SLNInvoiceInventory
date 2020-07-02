@@ -1,4 +1,5 @@
 ﻿using Contracts.Domain.BaseClasses;
+using Contracts.Domain.Interfaces;
 using System;
 
 namespace Domain.Models.Rechnungen
@@ -27,7 +28,12 @@ namespace Domain.Models.Rechnungen
 
         public decimal?  Zuzahlung { get; set; }
 
-       
+        public override bool Storno(IStornoReference stornoReference)
+        {
+            // Do some housekeeping . . .
+            base.Storno(stornoReference);
+            return base.Storno(stornoReference);
+        }
 
 
     }
